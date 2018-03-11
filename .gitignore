@@ -1,2 +1,7 @@
 /bin/
 target/*
+Decide/.settings/org.eclipse.m2e.core.prefs
+Decide/.settings/org.eclipse.core.resources.prefs
+Decide/.settings/org.eclipse.jdt.core.prefs
+Decide/.project
+Decide/.classpath
