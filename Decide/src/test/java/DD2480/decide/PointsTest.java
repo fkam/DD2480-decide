@@ -13,8 +13,8 @@ public class PointsTest{
         Points b = new Points(12,12);
         Double result1 = new Double(a.distance(b));
         Double result2 = new Double(b.distance(a));
-         System.out.println(result1);
-        // System.out.println(result2);
+        //System.out.println(result1);
+        //System.out.println(result2);
         
         //test that distance does not dependant on which point calls the method 
         assertTrue(result1.equals(result2));
