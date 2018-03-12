@@ -5,7 +5,7 @@ import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.assertFalse;
 import java.util.Arrays;
 
-public class CMVTest{
+public class CMVHandlerTest{
     
 
     @Test
