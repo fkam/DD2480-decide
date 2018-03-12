@@ -18,7 +18,7 @@ public class CMVHandlerTest{
 		};
 		CMVHandler handler = new CMVHandler(parameters,datapoints);
 		CMV = handler.generateCMV();
-		System.out.println(CMV[1]);
+		//System.out.println(CMV[1]);
 		assertFalse(CMV[1]);
 	}
 	@Test
@@ -37,10 +37,11 @@ public class CMVHandlerTest{
 		};
 		CMVHandler handler = new CMVHandler(parameters,datapoints);
 		CMV = handler.generateCMV();
-		System.out.println("DEERRRp"+CMV[1]);
+		/*
+		System.out.println(CMV[1]);
 		for(boolean x: CMV){
 			System.out.println(x);
-		}
+		}*/
 		assertTrue(CMV[1]);
 	}
 }
