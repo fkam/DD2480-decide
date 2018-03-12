@@ -35,7 +35,35 @@ public class CMVHandler {
 	}
 
 	private boolean licOne() {
-		// TODO Auto-generated method stub
+		if(dataPoints.length<3){
+			return false;
+		}
+		//first 3 consecutive datapoints
+		Points first = dataPoints[0];
+		Points second = dataPoints[1];
+		Points third = dataPoints[2];
+		boolean keepSearching = (dataPoints.length>3) ? true : false;
+		for(int i = 2; i<dataPoints.length;){
+			//calculate point equidistant from all 3 points
+			double centerX = (first.x + second.x + third.x)/3;
+			double centerY = (first.y + second.y + third.y)/3;
+			Points center = new Points(centerX,centerY);
+			//if the distance is between the center of the circle and the 
+			//3 points return true
+			if(center.distance(first) > parameters.radius1 ||
+			   center.distance(second)> parameters.radius1 ||
+			   center.distance(third) > parameters.radius1){
+				return true;
+			}
+			i++;
+			//shift the consecutive datapoint forward one step if we have a set of points larger than 3
+			if(keepSearching){
+				first = second;
+				second = third;
+				third = dataPoints[i];
+			}
+		}
+		//if no point found return false
 		return false;
 	}
 
