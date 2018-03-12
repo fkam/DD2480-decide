@@ -19,6 +19,6 @@ public class PointsTest{
         //test that distance does not dependant on which point calls the method 
         assertTrue(result1.equals(result2));
         //test that the distance was calculated correctly
-        assertTrue(result1.equals(2));
+        assertTrue(result1.equals(new Double(2)));
     }
 }
