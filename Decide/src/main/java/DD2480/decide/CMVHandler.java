@@ -93,6 +93,7 @@ public class CMVHandler {
 				second = third;
 				third = dataPoints[i];
 			}
+			
 		}
 		return false;
 	}
