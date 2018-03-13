@@ -2,7 +2,37 @@ package DD2480.decide;
 
 import org.junit.Test;
 import static org.junit.Assert.*;
+
 public class CMVHandlerTest{
+
+    @Test
+    /**
+     * @result return true/false if distance between two points is larger than LENGHT1.
+    **/
+    public void CMVlicZero(){
+  
+        boolean[] CMV = new boolean[15];
+        Parameter parameter = new Parameter();
+
+        Points[] dataPoints = {
+            new Points(0.0, 0.0),
+            new Points(5.0, 5.0),
+            new Points(4.0, 5.0),
+            new Points(7.0, 9.0)
+        };
+
+          CMVHandler handler = new CMVHandler(parameter, dataPoints);
+          parameter.length1 = 7;
+          CMV = handler.generateCMV();
+          assertTrue(CMV[0]);
+  
+          parameter.length1 = 10;
+          CMV = handler.generateCMV();
+          assertFalse(CMV[0]);
+
+      }
+
+
 	@Test
 	/**
 	 * @result when all consequite datapoints can be put into a circle returns false
