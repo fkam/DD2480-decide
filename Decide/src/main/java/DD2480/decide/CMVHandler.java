@@ -31,14 +31,15 @@ public class CMVHandler {
 		return CMV;
 	}
 
-	private boolean licZero() {
+    // There exists atleast one set of two consective data points that are a distance greater than the length, LENGTH1, apart.
+    private boolean licZero() {
         Points dp1, dp2;
-        
+        // iterate through the list od datapoints, calculate the distance and compare to the length.
         for(int i = 0; i < this.dataPoints.length - 1; i++) {
             dp1 = this.dataPoints[i];
             dp2 = this.dataPoints[i+1];
 
-            double dist = Math.sqrt(Math.pow(Math.abs(dp1.x - dp2.x), 2) + Math.pow(Math.abs(dp1.y - dp2.y), 2));
+            double dist = dp1.distance(dp2);
 
             if (dist > parameters.length1) {
                 return true;
@@ -50,7 +51,35 @@ public class CMVHandler {
 
 
 	private boolean licOne() {
-		// TODO Auto-generated method stub
+		if(dataPoints.length<3){
+			return false;
+		}
+		//first 3 consecutive datapoints
+		Points first = dataPoints[0];
+		Points second = dataPoints[1];
+		Points third = dataPoints[2];
+		boolean keepSearching = (dataPoints.length>3) ? true : false;
+		for(int i = 2; i<dataPoints.length;){
+			//calculate point equidistant from all 3 points
+			double centerX = (first.x + second.x + third.x)/3;
+			double centerY = (first.y + second.y + third.y)/3;
+			Points center = new Points(centerX,centerY);
+			//if the distance is between the center of the circle and the 
+			//3 points return true
+			if(center.distance(first) > parameters.radius1 ||
+			   center.distance(second)> parameters.radius1 ||
+			   center.distance(third) > parameters.radius1){
+				return true;
+			}
+			i++;
+			//shift the consecutive datapoint forward one step if we have a set of points larger than 3
+			if(keepSearching){
+				first = second;
+				second = third;
+				third = dataPoints[i];
+			}
+		}
+		//if no point found return false
 		return false;
 	}
 
