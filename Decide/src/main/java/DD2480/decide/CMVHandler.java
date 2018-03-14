@@ -132,10 +132,21 @@ public class CMVHandler {
 		// TODO Auto-generated method stub
 		return false;
 	}
-
+	
 	private boolean licTwelve() {
-		// TODO Auto-generated method stub
-		return false;
+		if(dataPoints.length < 3 || parameters.length2 < 0) {
+			return false;
+		}
+		boolean condition1 = false , condition2 = false;
+		for (int i = 0; i < dataPoints.length - parameters.kPts - 1; i++) {
+			if (dataPoints[i].distance(dataPoints[i + parameters.kPts +1]) > parameters.length1) {
+				condition1 = true;
+			}
+			if (dataPoints[i].distance(dataPoints[i + parameters.kPts +1]) < parameters.length2) {
+				condition2 = true;
+			}
+		}
+		return condition1 && condition2;
 	}
 
 	private boolean licThirteen() {
