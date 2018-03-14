@@ -71,7 +71,7 @@ public class CMVHandler {
 						return true;
 				}
 			} else {
-				double d = Math.sqrt((dataPoints[i].x-dataPoints[k].x) * (dataPoints[i].x-dataPoints[k].x) + (dataPoints[i].y-dataPoints[k].y) * (dataPoints[i].y-dataPoints[k].y));
+				double d = dataPoints[i].distance(dataPoints[k]);
 				for(int j = i+1;j<k;j++){
 					double s = GeometryHelper.area(dataPoints[i], dataPoints[k], dataPoints[j]);
 					double l = s / d;
