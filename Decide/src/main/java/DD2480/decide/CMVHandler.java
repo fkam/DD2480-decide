@@ -93,8 +93,7 @@ public class CMVHandler {
 		Points second = dataPoints[1];
 		Points third = dataPoints[2];
 		for(int i = 2;i <dataPoints.length;i++){
-						System.out.println(i + "  " +dataPoints.length);
-
+			
 			//considered unsatisifed if any of point 1 or 3 is coincide with point 2
 			if((first.x==second.x&&first.y==second.y)||(third.x==second.x&&third.y==second.y)){
 				continue;
@@ -158,7 +157,6 @@ public class CMVHandler {
 		int pos = 0;
 		for(int i = 2+parameters.cPts+parameters.dPts;i < dataPoints.length;i++){
 
-			System.out.println(i + "  " +dataPoints.length);
 			if((first.x==second.x&&first.y==second.y)||(third.x==second.x&&third.y==second.y)){
 				continue;
 			}
