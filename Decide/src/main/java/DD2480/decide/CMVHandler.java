@@ -61,6 +61,25 @@ public class CMVHandler {
 
 	private boolean licSix() {
 		// TODO Auto-generated method stub
+		if(dataPoints.length < 3 ||	nPts > dataPoints.length || dist < 0)
+			return false;
+		for(int i = 0;i < dataPoints.length-nPts;i++){
+			int k = i + nPts - 1;
+			if(dataPoints[i].x == dataPoints[k].x && dataPoints[i].y == dataPoints[k].y){
+				for(int j = i+1;j<k;j++){
+					if(dataPoints[j].x!=dataPoints[i].x || dataPoints[j].y!=dataPoints[i].y)
+						return true;
+				}
+			} else {
+				double d = Math.sqrt((dataPoints[i].x-dataPoints[k].x) * (dataPoints[i].x-dataPoints[k].x) + (dataPoints[i].y-dataPoints[k].y) * (dataPoints[i].y-dataPoints[k].y));
+				for(int j = i+1;j<k;j++){
+					double s = GeometryHelper.area(dataPoints[i], dataPoints[k], dataPoints[j]);
+					double l = s / d;
+					if(l > dist)
+						return true;
+				}
+			}
+		}
 		return false;
 	}
 
