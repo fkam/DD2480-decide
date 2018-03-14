@@ -22,7 +22,7 @@ public class CMVHandler {
 		CMV[6] = licSix();
 		CMV[7] = licSeven();
 		CMV[8] = licEigth();
-		CMV[9] = licLine();
+		CMV[9] = licNine();
 		CMV[10] = licTen();
 		CMV[11] = licEleven();
 		CMV[12] = licTwelve();
@@ -84,8 +84,35 @@ public class CMVHandler {
 	}
 
 	private boolean licTwo() {
-		// TODO Auto-generated method stub
+		if(dataPoints.length<3){
+			return false;
+		}
+		boolean keepSearching = (dataPoints.length>3) ? true : false;
+		//first 3 consecutive datapoints
+		Points first = dataPoints[0];
+		Points second = dataPoints[1];
+		Points third = dataPoints[2];
+		for(int i = 2;i <dataPoints.length;i++){
+			
+			//considered unsatisifed if any of point 1 or 3 is coincide with point 2
+			if((first.x==second.x&&first.y==second.y)||(third.x==second.x&&third.y==second.y)){
+				continue;
+			}
+			//get angle see if it is within the boundries
+			double angle = GeometryHelper.angle(first,second,third);
+			if((angle<Math.PI -parameters.epsilon)||(angle>Math.PI+parameters.epsilon)){
+				return true;
+			}
+
+			if(keepSearching){
+				first = second;
+				second = third;
+				third = dataPoints[i+1];
+			}
+			
+		}
 		return false;
+
 	}
 
 	private boolean licThree() {
@@ -118,8 +145,35 @@ public class CMVHandler {
 		return false;
 	}
 
-	private boolean licLine() {
-		// TODO Auto-generated method stub
+	private boolean licNine() {
+		if(dataPoints.length<5||parameters.cPts+parameters.dPts>dataPoints.length-3){
+			return false;
+		}
+		boolean keepSearching = (dataPoints.length>3+parameters.cPts+parameters.dPts) ? true : false;
+		//first 3 consecutive datapoints
+		Points first = dataPoints[0];
+		Points second = dataPoints[parameters.cPts+1];
+		Points third = dataPoints[parameters.cPts+parameters.dPts+2];
+		int pos = 0;
+		for(int i = 2+parameters.cPts+parameters.dPts;i < dataPoints.length;i++){
+
+			if((first.x==second.x&&first.y==second.y)||(third.x==second.x&&third.y==second.y)){
+				continue;
+			}
+			//get angle see if it is within the boundries
+			double angle = GeometryHelper.angle(first,second,third);
+			if((angle<Math.PI -parameters.epsilon)||(angle>Math.PI+parameters.epsilon)){
+				return true;
+			}
+
+			if(keepSearching&&(pos+parameters.cPts+parameters.dPts+2)>=dataPoints.length){
+				pos++;
+				first = dataPoints[pos];
+				second = dataPoints[pos+parameters.cPts+1];
+				third = dataPoints[pos+parameters.cPts+parameters.dPts+2];
+			}
+
+		}
 		return false;
 	}
 
