@@ -49,7 +49,6 @@ public class CMVHandlerTest{
 		};
 		CMVHandler handler = new CMVHandler(parameters,datapoints);
 		CMV = handler.generateCMV();
-		//System.out.println(CMV[1]);
 		assertFalse(CMV[1]);
 	}
 	@Test
@@ -69,11 +68,6 @@ public class CMVHandlerTest{
 		};
 		CMVHandler handler = new CMVHandler(parameters,datapoints);
 		CMV = handler.generateCMV();
-		/*
-		System.out.println(CMV[1]);
-		for(boolean x: CMV){
-			System.out.println(x);
-		}*/
 		assertTrue(CMV[1]);
 	}
 
@@ -104,17 +98,13 @@ public class CMVHandlerTest{
 		boolean[] CMV = new boolean[15];
 		Parameter parameters = new Parameter();
 		parameters.epsilon = Math.PI/4;
-		System.out.println(Math.PI - parameters.epsilon);
-		System.out.println(Math.PI + parameters.epsilon);
 		Points[] datapoints = {
 			new Points(0.0,0.0),
 			new Points(1.5,0.1),
 			new Points(3.0,0.0)
 		};
-		System.out.println(GeometryHelper.angle(datapoints[0],datapoints[1],datapoints[2]));
 		CMVHandler handler = new CMVHandler(parameters,datapoints);
 		CMV = handler.generateCMV();
-		System.out.println(CMV[2]);
 		assertFalse(CMV[2]);
 	}
 	@Test
