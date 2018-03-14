@@ -1,5 +1,7 @@
 package DD2480.decide;
 
+import java.lang.Math;
+
 public class CMVHandler {
 	
 	boolean[] CMV = new boolean[15]; 
@@ -29,10 +31,24 @@ public class CMVHandler {
 		return CMV;
 	}
 
-	private boolean licZero() {
-		// TODO Auto-generated method stub
-		return false;
-	}
+    // There exists atleast one set of two consective data points that are a distance greater than the length, LENGTH1, apart.
+    private boolean licZero() {
+        Points dp1, dp2;
+        // iterate through the list od datapoints, calculate the distance and compare to the length.
+        for(int i = 0; i < this.dataPoints.length - 1; i++) {
+            dp1 = this.dataPoints[i];
+            dp2 = this.dataPoints[i+1];
+
+            double dist = dp1.distance(dp2);
+
+            if (dist > parameters.length1) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
 
 	private boolean licOne() {
 		if(dataPoints.length<3){
