@@ -13,20 +13,25 @@ public class GeometryHelperTest{
 		Points b = new Points(0,0);
 		Points c = new Points(0,1);
 		double angle = GeometryHelper.angle(a,b,c);
-		assertTrue(Math.toDegrees(angle)==45.0);
-		//switch points
+		assertTrue(Math.abs(Math.toDegrees(angle)-45.0)<0.00001);
+		//switch Points
+
 		a  =  new Points(0,1);
 		b  =  new Points(1,1);
 		c  =  new Points(0,0);
 		angle = GeometryHelper.angle(a,b,c);
-		assertTrue(Math.toDegrees(angle)==45.0);
+
+		assertTrue(Math.abs(Math.toDegrees(angle)-45.0)<0.00001);
+
 		//switch points
 		a  =  new Points(0,0);
 		b  =  new Points(0,1);
 		c  =  new Points(1,1);
 		angle = GeometryHelper.angle(a,b,c);
-		assertTrue(Math.toDegrees(angle)==90.0);
+		assertTrue(Math.abs(Math.toDegrees(angle)-90.0)<0.00001);
 	}
+
+
 
 	@Test
 	/**
@@ -52,4 +57,32 @@ public class GeometryHelperTest{
 		area = GeometryHelper.area(a,b,c);
 		assertTrue(area==2.5);
 	}
+<<<<<<< HEAD
+
+	@Test
+	/**
+	 *@result the area of the triangle decided by 3 given points is correctly calculated
+	 */
+	public void testArea(){
+		//given input for which output is defined output correct area
+		Points a = new Points(1,1);
+		Points b = new Points(2,0);
+		Points c = new Points(0,1);
+		double area = GeometryHelper.area(a,b,c);
+		assertTrue(area==0.5);
+		//switch points
+		a  =  new Points(1,1);
+		b  =  new Points(1,2);
+		c  =  new Points(1,0);
+		area = GeometryHelper.area(a,b,c);
+		assertTrue(area==0.0);
+		//switch points
+		a  =  new Points(0,0);
+		b  =  new Points(0,5);
+		c  =  new Points(1,2);
+		area = GeometryHelper.area(a,b,c);
+		assertTrue(area==2.5);
+	}
+=======
+>>>>>>> fccb9423c0d28bcc5dd27c7ee2922e926fb9e3f4
 }
