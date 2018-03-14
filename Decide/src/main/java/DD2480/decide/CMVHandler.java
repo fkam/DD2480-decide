@@ -91,10 +91,28 @@ public class CMVHandler {
 		// TODO Auto-generated method stub
 		return false;
 	}
-
+    /*
+     * There exits at least one set of two data points separated by exactly kPts consecutive intervening points that are a distance greater than the length,
+     * LENGTH1, apart. The condition is not met whe NUMPOINTS < 3. 1 =< kPts =< NUMPOINTS - 2.
+     */
 	private boolean licSeven() {
-		// TODO Auto-generated method stub
-		return false;
+        Points  dp1, dp2;
+        if (dataPoints.length < 3){
+            return false;
+        }
+        if (1 > parameters.kPts || parameters.kPts > (dataPoints.length - 2)){
+            return false;
+        }
+        for (int i = 0; i < dataPoints.length - parameters.kPts - 1; i++){
+            dp1 = dataPoints[i];
+            dp2 = dataPoints[i + parameters.kPts + 1];
+
+            double dist = dp1.distance(dp2);
+            if (dist > parameters.length1){
+                return true;
+            }
+        }
+        return false;
 	}
 
 	private boolean licEigth() {
