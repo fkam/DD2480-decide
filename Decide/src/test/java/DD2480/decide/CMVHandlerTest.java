@@ -112,30 +112,37 @@ public class CMVHandlerTest{
 	/**
 	 * @result when there exists at least 1 data point that lies a distance greater than DIST from the line return true
 	 **/
-	public void testCMV6nice(){
+	public void testCMV6nice1(){
 		boolean[] CMV = new boolean[15];
 
 		Parameter parameters = new Parameter();
 		parameters.dist = 2.0;
 		parameters.nPts = 3;
-		Points[] datapoints = {
+		Points[] datapoints1 = {
 			new Points(0.0 , 0.0),
 			new Points(-1.0 , 2.5),
 			new Points(2.0 , 0.0),
 			new Points(0.0 , 2.0)
 		};
-		CMVHandler handler = new CMVHandler(parameters,datapoints);
-		CMV = handler.generateCMV();
+		CMVHandler handler1 = new CMVHandler(parameters,datapoints1);
+		CMV = handler1.generateCMV();
 		assertTrue(CMV[6]);
-		parameters.dist = 1.0;
-		Points[] datapoints = {
+    }
+
+    @Test
+    public void testCMV6nice2(){
+        boolean[] CMV = new boolean[15];
+        Parameter parameters = new Parameter();
+        parameters.dist = 1.0;
+        parameters.nPts = 3;
+		Points[] datapoints2 = {
 			new Points(0.0 , 0.0),
 			new Points(-1.0 , 1.0),
 			new Points(0.0 , 0.0),
 			new Points(0.0 , 2.0)
 		};
-		CMVHandler handler = new CMVHandler(parameters,datapoints);
-		CMV = handler.generateCMV();
+		CMVHandler handler2 = new CMVHandler(parameters,datapoints2);
+		CMV = handler2.generateCMV();
 		assertTrue(CMV[6]);
 	}
 
@@ -148,17 +155,17 @@ public class CMVHandlerTest{
 		Parameter parameters = new Parameter();
 		parameters.dist = 20.0;
 		parameters.nPts = 3;
-		Points[] datapoints = {};
-		CMVHandler handler = new CMVHandler(parameters,datapoints);
-		CMV = handler.generateCMV();
+		Points[] datapoints1 = {};
+		CMVHandler handler1 = new CMVHandler(parameters,datapoints1);
+		CMV = handler1.generateCMV();
 		assertFalse(CMV[6]);
-		Points[] datapoints = {
+		Points[] datapoints2 = {
 			new Points(0.0 , 0.0),
 			new Points(1.5 , 0.1),
 			new Points(3.0 , 0.0)
 		};
-		CMVHandler handler = new CMVHandler(parameters,datapoints);
-		CMV = handler.generateCMV();
+		CMVHandler handler2 = new CMVHandler(parameters,datapoints2);
+		CMV = handler2.generateCMV();
 		assertFalse(CMV[6]);
 	}
 
@@ -240,19 +247,19 @@ public class CMVHandlerTest{
 		parameters.area1 = 20.0;
 		parameters.ePts = 1;
 		parameters.fPts = 1;
-		Points[] datapoints = {};
-		CMVHandler handler = new CMVHandler(parameters,datapoints);
-		CMV = handler.generateCMV();
+		Points[] datapoints1 = {};
+		CMVHandler handler1 = new CMVHandler(parameters,datapoints1);
+		CMV = handler1.generateCMV();
 		assertFalse(CMV[10]);
-		Points[] datapoints = {
+		Points[] datapoints2 = {
 			new Points(0.0 , 0.0),
 			new Points(0.0 , 0.0),
 			new Points(1.5 , 0.1),
 			new Points(1.5 , 0.1),
 			new Points(3.0 , 0.0)
 		};
-		CMVHandler handler = new CMVHandler(parameters,datapoints);
-		CMV = handler.generateCMV();
+		CMVHandler handler2 = new CMVHandler(parameters,datapoints2);
+		CMV = handler2.generateCMV();
 		assertFalse(CMV[10]);
 	}
 
@@ -265,24 +272,24 @@ public class CMVHandlerTest{
 
 		Parameter parameters = new Parameter();
 		parameters.gPts = 1;
-		Points[] datapoints = {
+		Points[] datapoints1 = {
 			new Points(0.0 , 0.0),
 			new Points(1.0 , 2.5),
 			new Points(2.0 , 0.0),
 			new Points(0.0 , 2.0)
 		};
-		CMVHandler handler = new CMVHandler(parameters,datapoints);
-		CMV = handler.generateCMV();
+		CMVHandler handler1 = new CMVHandler(parameters,datapoints1);
+		CMV = handler1.generateCMV();
 		assertTrue(CMV[11]);
 		parameters.gPts = 2;
-		Points[] datapoints = {
+		Points[] datapoints2 = {
 			new Points(4.0 , 0.0),
 			new Points(-1.0 , 1.0),
 			new Points(0.0 , 0.0),
 			new Points(0.0 , 2.0)
 		};
-		CMVHandler handler = new CMVHandler(parameters,datapoints);
-		CMV = handler.generateCMV();
+		CMVHandler handler2 = new CMVHandler(parameters,datapoints2);
+		CMV = handler2.generateCMV();
 		assertTrue(CMV[11]);
 	}
 
@@ -294,20 +301,20 @@ public class CMVHandlerTest{
 		boolean[] CMV = new boolean[15];
 		Parameter parameters = new Parameter();
 		parameters.gPts = 1;
-		Points[] datapoints = {
+		Points[] datapoints1 = {
 			new Points(1.0 , 0.0),
 			new Points(0.0 , 0.0)
 		};
-		CMVHandler handler = new CMVHandler(parameters,datapoints);
-		CMV = handler.generateCMV();
+		CMVHandler handler1 = new CMVHandler(parameters,datapoints1);
+		CMV = handler1.generateCMV();
 		assertFalse(CMV[11]);
-		Points[] datapoints = {
+		Points[] datapoints2 = {
 			new Points(0.0 , 0.0),
 			new Points(1.5 , 0.1),
 			new Points(3.0 , 0.0)
 		};
-		CMVHandler handler = new CMVHandler(parameters,datapoints);
-		CMV = handler.generateCMV();
+		CMVHandler handler2 = new CMVHandler(parameters,datapoints2);
+		CMV = handler2.generateCMV();
 		assertFalse(CMV[11]);
 	}
 

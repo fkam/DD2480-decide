@@ -131,11 +131,10 @@ public class CMVHandler {
 	}
 
 	private boolean licSix() {
-		// TODO Auto-generated method stub
-		if(nPts < 3 || nPts > dataPoints.length || dist < 0)
+		if(parameters.nPts < 3 ||parameters.nPts > dataPoints.length || parameters.dist < 0)
 			return false;
-		for(int i = 0;i < dataPoints.length-nPts+1;i++){
-			int k = i + nPts - 1;
+		for(int i = 0;i < dataPoints.length-parameters.nPts+1;i++){
+			int k = i + parameters.nPts - 1;
 			if(dataPoints[i].x == dataPoints[k].x && dataPoints[i].y == dataPoints[k].y){
 				for(int j = i+1;j<k;j++){
 					if(dataPoints[j].x!=dataPoints[i].x || dataPoints[j].y!=dataPoints[i].y)
@@ -146,7 +145,7 @@ public class CMVHandler {
 				for(int j = i+1;j<k;j++){
 					double s = GeometryHelper.area(dataPoints[i], dataPoints[k], dataPoints[j]);
 					double l = s / d;
-					if(l > dist)
+					if(l > parameters.dist)
 						return true;
 				}
 			}
@@ -197,23 +196,22 @@ public class CMVHandler {
 	}
 
 	private boolean licTen() {
-		// TODO Auto-generated method stub
-		if(ePts < 1 || fPts < 1 || ePts+fPts+2<dataPoints.length)
+		if(parameters.ePts < 1 || parameters.fPts < 1 || parameters.ePts+parameters.fPts+2<dataPoints.length)
 			return false;
-		for(int i = 0;i<dataPoints.length-ePts-fPts-2;i++){
-			double s = GeometryHelper.area(dataPoints[i], dataPoints[i+ePts+1], dataPoints[i+ePts+fPts+2]);
-			if(s > area1)
+		for(int i = 0;i<dataPoints.length-parameters.ePts-parameters.fPts-2;i++){
+			double s = GeometryHelper.area(dataPoints[i], dataPoints[i+parameters.ePts+1],
+                         dataPoints[i+parameters.ePts+parameters.fPts+2]);
+			if(s > parameters.area1)
 				return true;
 		}
 		return false;
 	}
 
 	private boolean licEleven() {
-		// TODO Auto-generated method stub
-		if(gPts < 1 || gPts > dataPoints.length - 2)
+		if(parameters.gPts < 1 || parameters.gPts > dataPoints.length - 2)
 			return false;
-		for(int i = 0;i<dataPoints.length-gPts-1;i++){
-			if(dataPoints[i+gPts+1].x-dataPoints[i].x<0)
+		for(int i = 0;i<dataPoints.length-parameters.gPts-1;i++){
+			if(dataPoints[i+parameters.gPts+1].x-dataPoints[i].x<0)
 				return true;
 		}
 		return false;
