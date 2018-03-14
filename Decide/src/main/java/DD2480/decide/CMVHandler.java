@@ -100,7 +100,7 @@ public class CMVHandler {
 
 	private boolean licTen() {
 		// TODO Auto-generated method stub
-		if(ePts < 0 || fPts < 0 || ePts+fPts+2<dataPoints.length)
+		if(ePts < 1 || fPts < 1 || ePts+fPts+2<dataPoints.length)
 			return false;
 		for(int i = 0;i<dataPoints.length-ePts-fPts-2;i++){
 			double s = GeometryHelper.area(dataPoints[i], dataPoints[i+ePts+1], dataPoints[i+ePts+fPts+2]);
