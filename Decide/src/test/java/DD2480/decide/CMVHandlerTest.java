@@ -14,7 +14,7 @@ public class CMVHandlerTest{
 		Points[] datapoints = {
 			new Points(0.0,0.0),
 			new Points(1.0,0.0),
-			new Points(2.0,0.0)	
+			new Points(2.0,0.0)
 		};
 		CMVHandler handler = new CMVHandler(parameters,datapoints);
 		CMV = handler.generateCMV();
@@ -83,5 +83,49 @@ public class CMVHandlerTest{
 		CMV = handler.generateCMV();
 		System.out.println(CMV[2]);
 		assertFalse(CMV[2]);
+	}
+	@Test
+	/**
+	 *@result
+	 */
+	public void testCMV9nice(){
+		boolean[] CMV = new boolean[15];
+		Parameter parameters = new Parameter();
+		parameters.epsilon = (Math.PI/4)*3;
+		parameters.cPts = 1;
+		parameters.dPts = 1;
+		Points[] datapoints = {
+			new Points(0.0,2222.0),
+			new Points(1.0,1.0),
+			new Points(3.0,0.0),
+			new Points(0.0,0.0),
+			new Points(0.0,2222.0),
+			new Points(1.0,0.0)
+		};
+		CMVHandler handler = new CMVHandler(parameters,datapoints);
+		CMV = handler.generateCMV();
+		assertTrue(CMV[9]);
+	}
+	@Test
+	/**
+	 *@result
+	 */
+	public void testCMV9bad(){
+		boolean[] CMV = new boolean[15];
+		Parameter parameters = new Parameter();
+		parameters.epsilon = Math.PI/4;
+		parameters.cPts = 1;
+		parameters.dPts = 1;
+		Points[] datapoints = {
+			new Points(0.0,0.0),
+			new Points(0.0,0.0),
+			new Points(1.5,0.1),
+			new Points(1.5,0.1),
+			new Points(3.0,0.0),
+			new Points(3.0,0.0)
+		};
+		CMVHandler handler = new CMVHandler(parameters,datapoints);
+		CMV = handler.generateCMV();
+		assertFalse(CMV[9]);
 	}
 }
