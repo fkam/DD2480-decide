@@ -20,7 +20,7 @@ public class CMVHandler {
 		CMV[6] = licSix();
 		CMV[7] = licSeven();
 		CMV[8] = licEigth();
-		CMV[9] = licLine();
+		CMV[9] = licNine();
 		CMV[10] = licTen();
 		CMV[11] = licEleven();
 		CMV[12] = licTwelve();
@@ -61,9 +61,9 @@ public class CMVHandler {
 
 	private boolean licSix() {
 		// TODO Auto-generated method stub
-		if(dataPoints.length < 3 ||	nPts > dataPoints.length || dist < 0)
+		if(nPts < 3 || nPts > dataPoints.length || dist < 0)
 			return false;
-		for(int i = 0;i < dataPoints.length-nPts;i++){
+		for(int i = 0;i < dataPoints.length-nPts+1;i++){
 			int k = i + nPts - 1;
 			if(dataPoints[i].x == dataPoints[k].x && dataPoints[i].y == dataPoints[k].y){
 				for(int j = i+1;j<k;j++){
@@ -93,7 +93,7 @@ public class CMVHandler {
 		return false;
 	}
 
-	private boolean licLine() {
+	private boolean licNine() {
 		// TODO Auto-generated method stub
 		return false;
 	}
