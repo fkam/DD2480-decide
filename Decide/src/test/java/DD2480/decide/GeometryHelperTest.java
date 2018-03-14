@@ -13,20 +13,25 @@ public class GeometryHelperTest{
 		Points b = new Points(0,0);
 		Points c = new Points(0,1);
 		double angle = GeometryHelper.angle(a,b,c);
-		assertTrue(Math.toDegrees(angle)==45.0);
-		//switch points
+		assertTrue(Math.abs(Math.toDegrees(angle)-45.0)<0.00001);
+		//switch Points
+
 		a  =  new Points(0,1);
 		b  =  new Points(1,1);
 		c  =  new Points(0,0);
 		angle = GeometryHelper.angle(a,b,c);
-		assertTrue(Math.toDegrees(angle)==45.0);
+
+		assertTrue(Math.abs(Math.toDegrees(angle)-45.0)<0.00001);
+
 		//switch points
 		a  =  new Points(0,0);
 		b  =  new Points(0,1);
 		c  =  new Points(1,1);
 		angle = GeometryHelper.angle(a,b,c);
-		assertTrue(Math.toDegrees(angle)==90.0);
+		assertTrue(Math.abs(Math.toDegrees(angle)-90.0)<0.00001);
 	}
+
+
 
 	@Test
 	/**
