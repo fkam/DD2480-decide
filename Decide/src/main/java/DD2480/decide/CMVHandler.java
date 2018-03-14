@@ -112,6 +112,12 @@ public class CMVHandler {
 
 	private boolean licEleven() {
 		// TODO Auto-generated method stub
+		if(gPts < 1 || gPts > dataPoints.length - 2)
+			return false;
+		for(int i = 0;i<dataPoints.length-gPts-1;i++){
+			if(dataPoints[i+gPts+1].x-dataPoints[i].x<0)
+				return true;
+		}
 		return false;
 	}
 
