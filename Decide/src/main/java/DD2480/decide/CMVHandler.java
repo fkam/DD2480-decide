@@ -89,9 +89,31 @@ public class CMVHandler {
 	}
 
 	private boolean licFour() {
-		// TODO Auto-generated method stub
-		return false;
-	}
+        if (parameters.qPts < 2 || parameters.qPts > dataPoints.length){
+            return false;
+        } 
+        if ( parameters.quads > 3 || parameters.quads < 1){
+            return false; 
+        }
+        for (int index = 0; index < (dataPoints.length - parameters.qPts + 1); index++) {
+            boolean[] quads = {false, false, false, false};
+            
+            for (int i = index; i < parameters.qPts + index; i++) {
+                int quadrant = GeometryHelper.getQuadrant(this.dataPoints[i]);
+                quads[quadrant - 1] = true;
+            }
+
+            int numQuads = 0;
+            for (int i = 0; i < quads.length; i++) {
+                if (quads[i])
+                    numQuads++;
+            }
+            if (numQuads > parameters.quads) {
+                return true;
+            }
+        }
+        return false;
+    }
 
 	private boolean licFive() {
         for (int i = 0; i < dataPoints.length - 1; i++) {
@@ -262,22 +284,40 @@ public class CMVHandler {
             Points p1 = dataPoints[index];
             Points p2 = dataPoints[index + parameters.aPts + 1];
             Points p3 = dataPoints[index + parameters.aPts + 2 + parameters.bPts];
-        
-            if(!GeometryHelper.pointsWithinACircle(p1,p2,p3,parameters.radius1)){
-                condition1 = true;
-            }
-            if(GeometryHelper.pointsWithinACircle(p1,p2,p3,parameters.radius2)){
-                condition2 = true;
-            }
-        }
-        if(condition1&&condition2){
-            return true;
-        }
-        return false;
+  
+              if(!GeometryHelper.pointsWithinACircle(p1,p2,p3,parameters.radius1)){
+                  condition1 = true;
+              }
+              if(GeometryHelper.pointsWithinACircle(p1,p2,p3,parameters.radius2)){
+                  condition2 = true;
+              }
+          }
+          if(condition1&&condition2){
+              return true;
+          }
+          return false;
     }
 
     private boolean licFourteen() {
-        // TODO Auto-generated method stub
-        return false;
-    }	
+        if (dataPoints.length < 5 || parameters.area2 < 0 ) {
+            return false;
+        }
+
+        boolean greater = false;
+        boolean lesser = false;
+
+        for (int index = 0; index < (dataPoints.length - parameters.ePts - parameters.fPts - 2); index++) {
+            if (GeometryHelper.area(dataPoints[index],
+                        dataPoints[index + parameters.ePts + 1],
+                        dataPoints[index + parameters.ePts + parameters.fPts + 2]) > parameters.area1)
+                greater = true;
+            if (GeometryHelper.area(dataPoints[index],
+                        dataPoints[index + parameters.ePts + 1],
+                        dataPoints[index + parameters.ePts + parameters.fPts + 2]) < parameters.area2)
+                lesser = true;
+        }
+
+        return greater && lesser;
+    }
+
 }
