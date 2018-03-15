@@ -26,6 +26,7 @@ public class Decide {
 	 *@return a boolean, true for LAUNCH or false for NO LAUNCH
 	 */
 	public Decide(Parameter parameters, Lcm LCM, boolean[] PUV,  Points[] dataPoints) {
+
 		this.parameters = parameters;
 		this.LCM = LCM;
 		this.PUV = PUV;
@@ -41,6 +42,7 @@ public class Decide {
 	}
 	
 	// Here are all the LIC contions processed
+
 	private boolean[] generateCMV() {
 		return CMVHandler.generateCMV();
 	}
