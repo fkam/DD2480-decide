@@ -33,31 +33,30 @@ public class Decide {
 	}
 	
 	private boolean[][] generatePUM() {
-		boolean pum [][] = new boolean[15][15];
 		for(int i = 0;i<14;i++){
 			for( int j = 0;i<14;i++){
 				switch (LCM.getElement(i,j)) {
 					case ANDD:
 						if(CMV[i] &&CMV[j]){
-							pum[i][j] = true;
+							PUM[i][j] = true;
 						}else{
-							pum[i][j] = false;
+							PUM[i][j] = false;
 						}
 						break;
 					case ORR:
 						if(CMV[i]||CMV[j]){
-							pum[i][j] = true;
+							PUM[i][j] = true;
 						}
 						else{
-							pum[i][j] = false;
+							PUM[i][j] = false;
 						}
 						break;
 					case NOTUSED:
-						pum[i][j] = true;					
+						PUM[i][j] = true;					
 				}
 			}
 		}
-		return pum;
+		return PUM;
 	}
 	
 	private boolean[] generateFUV() {
