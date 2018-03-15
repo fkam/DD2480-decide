@@ -168,6 +168,52 @@ public class CMVHandlerTest{
 		CMV = handler2.generateCMV();
 		assertFalse(CMV[6]);
 	}
+	@Test
+	/**
+	 *@result given a set of data where there exists a subset of data
+	 * when the height of the triangle created by the points is less than the
+	 * distance but the distance from any of the end points is greater than dist 
+	 * and the point is also not between the the start and end point
+	 */
+	public void testCMV6InHeightOutside(){
+		boolean[] CMV = new boolean[15];
+		Parameter parameters = new Parameter();
+		parameters.dist = 1.5;
+		parameters.nPts = 3;
+		assertFalse(CMV[6]);
+		Points[] datapoints = {
+			new Points(0.0 , 0.0),
+			new Points(1000 , 1.0),
+			new Points(5.0 , 0.0)
+		};
+		CMVHandler handler2 = new CMVHandler(parameters,datapoints);
+		CMV = handler2.generateCMV();
+		assertTrue(CMV[6]);
+
+	}
+	@Test
+	/**
+	 *@result given a set of data where no point satisfies the condition for CMV[6]
+	 * and if the any point is withi distance of the line between the first point and the
+	 * last point in a given subset is between the first and the last points
+	 * as in on oposite sides of the two points 
+	 */
+	public void testCMV6InHeightInside(){
+		boolean[] CMV = new boolean[15];
+		Parameter parameters = new Parameter();
+		parameters.dist = 1.5;
+		parameters.nPts = 3;
+		assertFalse(CMV[6]);
+		Points[] datapoints = {
+			new Points(0.0 , 0.0),
+			new Points(2.0 , 1.0),
+			new Points(5.0 , 0.0)
+		};
+		CMVHandler handler2 = new CMVHandler(parameters,datapoints);
+		CMV = handler2.generateCMV();
+		assertFalse(CMV[6]);
+
+	}
 
 	@Test
 	/**
