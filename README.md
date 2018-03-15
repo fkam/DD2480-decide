@@ -33,6 +33,12 @@ Implemented CMV 6, CMV 10 and CMV 11. Code reviewing and discussions within the 
 - Discussions within teh group.
 
 #### François Castle:
+- Implemented CMV 3.
+- Implemented CMV 4.
+- Implemented CMV 5.
+- Implemented CMV 13.
+- Implemented CMV 14.
+- Discussion regarding code and implementations.
 
 #### Jonas Olofsson:
 Contributed with code and managing the repo. I have done a lot of reviewing of code during pull requests. Also been active in several discussions regarding code and implementations.
