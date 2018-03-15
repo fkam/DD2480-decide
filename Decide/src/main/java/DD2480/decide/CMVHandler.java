@@ -1,7 +1,5 @@
 package DD2480.decide;
 
-import java.lang.Math;
-
 public class CMVHandler {
 	
 	boolean[] CMV = new boolean[15]; 
@@ -247,7 +245,22 @@ public class CMVHandler {
 	}
 
 	private boolean licThirteen() {
-		// TODO Auto-generated method stub
+        if (dataPoints.length < 5) {
+            return false;
+        }
+
+        for (int index = 0; index < dataPoints.length - (parameters.aPts + parameters.bPts + 2); index++) {
+            Points p1 = dataPoints[index];
+            Points p2 = dataPoints[index + parameters.aPts + 1];
+            Points p3 = dataPoints[index + parameters.aPts + 2 + parameters.bPts];
+            double d1 = p1.distance(p2);
+            double d2 = p2.distance(p3);
+            double d3 = p1.distance(p3);
+
+            if (Math.max(Math.max(d1, d2), d3) > (2 * parameters.radius1) && Math.max(Math.max(d1, d2), d3) < (2 * parameters.radius2))
+                return true;
+        }
+
 		return false;
 	}
 
