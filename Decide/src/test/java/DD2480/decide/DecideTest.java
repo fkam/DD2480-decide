@@ -73,16 +73,24 @@ public class DecideTest{
         lcm = new Lcm();
     }
     @Test
-    public void derp(){
-    	CMVHandler handler = new CMVHandler(parameters,points);
-    	boolean[] cmv = handler.generateCMV();
-    	for(int i = 0 ; i < 15; i ++){
-    		System.out.println(cmv[i]);
-    	}
-    }
-    @Test
-    public void testSomething(){
+    /**
+     *@result if there exists an ANDD entry in the lcm at position (i,j)
+     * then if both CMV[i] and CMV[j] are true the corresponding entry in the PUM
+     * at position (i,j) should be set to true
+     */
+    public void testPUMEvaluateTrueForANDD(){
     	Arrays.fill(puv,false);
-
+    	puv[0] = true;
+    	int i = 0;
+    	for (int j = 0; j < 15; j++){
+            lcm.setElement(i, j, Lcm.lcmElement.NOTUSED);
+        }
+        lcm.setElement(0,1,Lcm.lcmElement.ANDD);
+        assertTrue(lcm.getElement(0,1).toString()=="ANDD");
+        Decide decide = new Decide(parameters,lcm,puv,points);
+        assertTrue(decide.Decide());
+        Arrays.fill(puv,false);
+        lcm = new Lcm();
     }
+
 }
