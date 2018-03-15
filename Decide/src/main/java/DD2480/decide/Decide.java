@@ -39,9 +39,9 @@ public class Decide {
 				switch (LCM.getElement(i,j)) {
 					case ANDD:
 						if(CMV[i] &&CMV[j]){
-							toBeReturned[i][j] = false;
-						}else{
 							toBeReturned[i][j] = true;
+						}else{
+							toBeReturned[i][j] = false;
 						}
 						break;
 					case ORR:
