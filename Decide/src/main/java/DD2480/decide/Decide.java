@@ -41,7 +41,7 @@ public class Decide {
 		return launch();
 	}
 	
-	// Here are all the LIC contions processed
+	// Here are all the LIC conditions processed
 
 	private boolean[] generateCMV() {
 		return CMVHandler.generateCMV();
@@ -85,7 +85,7 @@ public class Decide {
         return FUV;
     }
     
-	// This is the last decition metod that returns the final boolean
+	// This is the last decision metod that returns the final boolean
     private boolean launch(){
         for(int i = 0; i < FUV.length; i++){
             if (!FUV[i]){
