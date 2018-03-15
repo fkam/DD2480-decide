@@ -58,7 +58,8 @@ public class DecideTest{
 
     @Test
     /**
-     * @result ensure that 
+     * @result if every element in the logical connector matrix is set to NOTUSED
+     * true all values in PUM evaluate to true and thusly decide returns true.
      */
     public void testPUM(){
     	Arrays.fill(puv,true);
@@ -69,5 +70,19 @@ public class DecideTest{
         }
         Decide decide = new Decide(parameters, lcm, puv, points);
         assertTrue(decide.Decide());
+        lcm = new Lcm();
+    }
+    @Test
+    public void derp(){
+    	CMVHandler handler = new CMVHandler(parameters,points);
+    	boolean[] cmv = handler.generateCMV();
+    	for(int i = 0 ; i < 15; i ++){
+    		System.out.println(cmv[i]);
+    	}
+    }
+    @Test
+    public void testSomething(){
+    	Arrays.fill(puv,false);
+
     }
 }
