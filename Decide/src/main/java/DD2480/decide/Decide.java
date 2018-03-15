@@ -17,7 +17,7 @@ public class Decide {
 		
 	}
 	
-	public boolean Decide( Parameter parameters, Lcm LCM, boolean[] PUV,  Points[] dataPoints) {
+	public static boolean Decide(Parameter parameters, Lcm LCM, boolean[] PUV,  Points[] dataPoints) {
 		this.parameters = parameters;
 		this.LCM = LCM;
 		this.PUV = PUV;
@@ -26,7 +26,7 @@ public class Decide {
 		CMV = generateCMV();
 		PUM = generatePUM();
 		FUV = generateFUV();
-    return launch();
+		return launch();
 	}
 
 	private boolean[] generateCMV() {
