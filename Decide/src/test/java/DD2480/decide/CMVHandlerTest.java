@@ -669,6 +669,59 @@ public class CMVHandlerTest{
          assertTrue(CMV[13]);
      }
 
+    @Test
+    /**
+     * @result pass the test if the subset is correct
+     **/
+    public void testCMV14bad() {
+        boolean[] CMV = new boolean[15];
+        Parameter parameters = new Parameter();
+        Points[] dataPoints = {
+                new Points(0.0, 0.0),
+                new Points(0.0, 0.0),
+                new Points(2.0, 0.0),
+                new Points(2.0, 0.0),
+                new Points(0.0, 5.0)
+        };
+        parameters.ePts = 1;
+        parameters.fPts = 1;
+        parameters.area1 = 1;
+        parameters.area2 = 2;
+
+        CMVHandler handler = new CMVHandler(parameters, dataPoints);
+        CMV = handler.generateCMV();
+
+        assertFalse(CMV[14]);
+    }
+    
+
+    @Test
+    /**
+     * @result pass the test if the subset is correct
+     **/
+    public void testCMV14nice() {
+        boolean[] CMV = new boolean[15];
+        Parameter parameters = new Parameter();
+        Points[] dataPoints = {
+                new Points(0.0, 0.0),
+                new Points(0.0, 0.0),
+                new Points(2.0, 0.0),
+                new Points(2.0, 0.0),
+                new Points(0.0, 5.0)
+        };
+        parameters.ePts = 1;
+        parameters.fPts = 1;
+        parameters.area1 = 1.0;
+        parameters.area2 = 1000;
+
+        CMVHandler handler = new CMVHandler(parameters, dataPoints);
+        CMV = handler.generateCMV();
+
+        System.out.print(CMV[14]);
+        assertTrue(CMV[14]);
+    }
+    
+
 }
 
 
