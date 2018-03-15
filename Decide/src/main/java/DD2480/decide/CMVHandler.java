@@ -137,14 +137,14 @@ public class CMVHandler {
 			int k = i + parameters.nPts - 1;
 			if(dataPoints[i].x == dataPoints[k].x && dataPoints[i].y == dataPoints[k].y){
 				for(int j = i+1;j<k;j++){
-					if(dataPoints[j].x!=dataPoints[i].x || dataPoints[j].y!=dataPoints[i].y)
+					if(dataPoints[i].distance(dataPoints[j]) > parameters.dist)
 						return true;
 				}
 			} else {
 				double d = dataPoints[i].distance(dataPoints[k]);
 				for(int j = i+1;j<k;j++){
 					double s = GeometryHelper.area(dataPoints[i], dataPoints[k], dataPoints[j]);
-					double l = s / d * 2.0;
+					double l = s * 2.0 / d;
 					if(l > parameters.dist)
 						return true;
 				}
