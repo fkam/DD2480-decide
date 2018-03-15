@@ -259,7 +259,7 @@ public class CMVHandler {
             if(!GeometryHelper.pointsWithinACircle(p1,p2,p3,parameters.radius1)){
                 condition1 = true;
             }
-            if(!GeometryHelper.pointsWithinACircle(p1,p2,p3,parameters.radius2)){
+            if(GeometryHelper.pointsWithinACircle(p1,p2,p3,parameters.radius2)){
                 condition2 = true;
             }
         }
