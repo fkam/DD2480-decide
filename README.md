@@ -25,6 +25,8 @@ Contributed by writing code and improving upon such as the functionally for gene
 - Implemented CMV 0.
 - Implemented CMV 7.
 - Implemented CMV 8.
+- Implemented FUV.
+- Implemented Launch.
 - Code reviewing.
 - Discussions within teh group.
 
