@@ -49,16 +49,16 @@ public class Decide {
         return FUV;
     }
     
-  
+
     private boolean launch(){
-        	for(int i = 0; i < FUV.length; i++){
-            	if (!FUV[i]){
-                	System.out.println("NO");
-                	return false;
+        for(int i = 0; i < FUV.length; i++){
+            if (!FUV[i]){
+                System.out.println("NO");
+                return false;
             }
         }
-        	System.out.println("YES");
-        	return true;
+        System.out.println("YES");
+        return true;
     }
 
     private boolean checkArray(boolean[] array, int i){
