@@ -516,6 +516,32 @@ public class CMVHandlerTest{
         CMV = handler.generateCMV();
         assertTrue(CMV[13]);
     }
+    @Test
+    /**
+     *@result given a set of datapoint which contain subsets of data which
+     * satisfy each condition individually but not at the same time true is returned.
+     */
+    public void testCMV13conditionsMetOndifferentSubsets(){
+        boolean[] CMV = new boolean[15];
+        Parameter parameters = new Parameter();
+        parameters.radius1 = 3.0;
+        parameters.radius2 = 1.0;
+        parameters.aPts = 1;
+        parameters.bPts = 1;
+
+        Points[] datapoints = {
+                new Points(0.0, 0.0),
+                new Points(0.0, 0.0),
+                new Points(3.5, 0.0),
+                new Points(1.0, 0.0),
+                new Points(0.0, 0.0),
+                new Points(1.0, 0.0),
+                new Points(0.0, 5.0),
+        };
+        CMVHandler handler = new CMVHandler(parameters, datapoints);
+        CMV = handler.generateCMV();
+        assertTrue(CMV[13]);
+    }
 }
 
 
