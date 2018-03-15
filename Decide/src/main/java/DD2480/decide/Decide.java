@@ -36,8 +36,8 @@ public class Decide {
 	}
 	
 	private boolean[][] generatePUM() {
-		for(int i = 0;i<14;i++){
-			for( int j = 0;i<14;i++){
+		for(int i = 0;i<15;i++){
+			for( int j = 0;j<15;j++){
 				switch (LCM.getElement(i,j)) {
 					case ANDD:
 						if(CMV[i] &&CMV[j]){

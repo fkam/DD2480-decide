@@ -15,6 +15,7 @@ public class DecideTest{
 		Points [] points = {
 			new Points(0.0,0.0),
 			new Points(1.0,1.0),
+			new Points(0.5,0.5),
 			new Points(0.0,5.0),
 			new Points(20.0,30.0),
 			new Points(45.0,300.0),
@@ -22,7 +23,6 @@ public class DecideTest{
 		};
 		Lcm lcm = new Lcm();
 		boolean [] puv = new boolean[15];
-        boolean[][] fum = new boolean[15][15];
 	@Before
 	public void setup(){
 		parameters.length1 = 1;
@@ -57,21 +57,17 @@ public class DecideTest{
 	}
 
     @Test
-    /*
-     * @result return true if whole fum is true
-     * fum set to true if lcm is NOTUSED
+    /**
+     * @result ensure that 
      */
-    public void testFuv2(){   
+    public void testPUM(){
+    	Arrays.fill(puv,true);
         for(int i = 0; i < 15; i++){
-            Arrays.fill(fum[i], true);
-            if(i == 3){
                 for (int j = 0; j < 15; j++){
                     lcm.setElement(i, j, Lcm.lcmElement.NOTUSED);
-                }
-            }                               
-        }                            
+                }       
+        }
         Decide decide = new Decide(parameters, lcm, puv, points);
         assertTrue(decide.Decide());
     }
-
 }
