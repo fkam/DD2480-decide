@@ -252,29 +252,50 @@ public class CMVHandler {
 	}
 
 	private boolean licThirteen() {
-		// TODO Auto-generated method stub
-		return false;
-	}
+        if (dataPoints.length < 5) {
+            return false;
+        }
+        boolean condition1 = false;
+        boolean condition2 = false;
 
-	private boolean licFourteen() {
+        for (int index = 0; index < dataPoints.length - (parameters.aPts + parameters.bPts + 2); index++) {
+            Points p1 = dataPoints[index];
+            Points p2 = dataPoints[index + parameters.aPts + 1];
+            Points p3 = dataPoints[index + parameters.aPts + 2 + parameters.bPts];
+  
+              if(!GeometryHelper.pointsWithinACircle(p1,p2,p3,parameters.radius1)){
+                  condition1 = true;
+              }
+              if(GeometryHelper.pointsWithinACircle(p1,p2,p3,parameters.radius2)){
+                  condition2 = true;
+              }
+          }
+          if(condition1&&condition2){
+              return true;
+          }
+          return false;
+    }
+
+    private boolean licFourteen() {
         if (dataPoints.length < 5 || parameters.area2 < 0 ) {
-		return false;
-	}
-		
-	boolean greater = false;
+            return false;
+        }
+
+        boolean greater = false;
         boolean lesser = false;
 
         for (int index = 0; index < (dataPoints.length - parameters.ePts - parameters.fPts - 2); index++) {
             if (GeometryHelper.area(dataPoints[index],
-                    dataPoints[index + parameters.ePts + 1],
-                    dataPoints[index + parameters.ePts + parameters.fPts + 2]) > parameters.area1)
+                        dataPoints[index + parameters.ePts + 1],
+                        dataPoints[index + parameters.ePts + parameters.fPts + 2]) > parameters.area1)
                 greater = true;
             if (GeometryHelper.area(dataPoints[index],
-                    dataPoints[index + parameters.ePts + 1],
-                    dataPoints[index + parameters.ePts + parameters.fPts + 2]) < parameters.area2)
+                        dataPoints[index + parameters.ePts + 1],
+                        dataPoints[index + parameters.ePts + parameters.fPts + 2]) < parameters.area2)
                 lesser = true;
         }
 
         return greater && lesser;
     }
+
 }

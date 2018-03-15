@@ -249,6 +249,7 @@ public class CMVHandlerTest{
 		CMV = handler2.generateCMV();
 		assertFalse(CMV[6]);
 	}
+
 	@Test
 	/**
 	 *@result given a set of data where there exists a subset of data
@@ -592,6 +593,59 @@ public class CMVHandlerTest{
 
         assertFalse(CMV[14]);
     }
+    
+    @Test
+    /*
+     *@result given a set of datapoints with no subset satisfying the condition false is returned
+     */
+    public void testCMV13() {
+        boolean[] CMV = new boolean[15];
+        Parameter parameters = new Parameter();
+        parameters.radius1 = 1.0;
+        parameters.radius2 = 3.0;
+        parameters.aPts = 1;
+        parameters.bPts = 2;
+
+        Points[] datapoints = {
+                new Points(0.0, 0.0),
+                new Points(0.0, 0.0),
+                new Points(3.0, 0.0),
+                new Points(4.0, 0.0),
+                new Points(0.0, 0.0),
+                new Points(1.0, 0.0),
+                new Points(0.0, 5.0),
+        };
+        CMVHandler handler = new CMVHandler(parameters, datapoints);
+        CMV = handler.generateCMV();
+        assertTrue(CMV[13]);
+    }
+
+     /*
+     * @result given a set of datapoint which contain subsets of data which
+     * satisfy each condition individually but not at the same time true is returned.
+     */
+     public void testCMV13conditionsMetOndifferentSubsets(){
+         boolean[] CMV = new boolean[15];
+         Parameter parameters = new Parameter();
+         parameters.radius1 = 3.0;
+         parameters.radius2 = 1.0;
+         parameters.aPts = 1;
+         parameters.bPts = 1;
+
+         Points[] datapoints = {
+             new Points(0.0, 0.0),
+             new Points(0.0, 0.0),
+             new Points(3.5, 0.0),
+             new Points(1.0, 0.0),
+             new Points(0.0, 0.0),
+             new Points(1.0, 0.0),
+             new Points(0.0, 5.0),
+         };
+         CMVHandler handler = new CMVHandler(parameters, datapoints);
+         CMV = handler.generateCMV();
+         assertTrue(CMV[13]);
+     }
+
 
     @Test
     /**
@@ -618,6 +672,8 @@ public class CMVHandlerTest{
         System.out.print(CMV[14]);
         assertTrue(CMV[14]);
     }
+    
+
 }
 
 
