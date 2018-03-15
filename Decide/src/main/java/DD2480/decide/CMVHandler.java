@@ -54,7 +54,6 @@ public class CMVHandler {
 		if(dataPoints.length<3){
 			return false;
 		}
-		boolean keepSearching = (dataPoints.length>3) ? true : false;
 		for(int i = 0; i<dataPoints.length-2;i++){
 			if(!GeometryHelper.pointsWithinACircle(dataPoints[i],dataPoints[i+1],dataPoints[i+2],parameters.radius1)){
 				return true;
