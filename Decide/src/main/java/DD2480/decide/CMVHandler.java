@@ -1,7 +1,5 @@
 package DD2480.decide;
 
-import java.lang.Math;
-
 public class CMVHandler {
 	
 	boolean[] CMV = new boolean[15]; 
@@ -93,8 +91,12 @@ public class CMVHandler {
 	}
 
 	private boolean licFive() {
-		// TODO Auto-generated method stub
-		return false;
+        for (int i = 0; i < dataPoints.length - 1; i++) {
+            if (dataPoints[i + 1].x - dataPoints[i].x < 0) {
+                return true;
+            }
+        }
+        return false;
 	}
 
 	private boolean licSix() {
