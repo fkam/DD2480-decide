@@ -110,6 +110,113 @@ public class CMVHandlerTest{
 		assertFalse(CMV[2]);
 	}
 
+	@Test
+	/**
+	 * @result when there exists at least 1 data point that lies a distance greater than DIST from the line return true
+	 **/
+	public void testCMV6nice1(){
+		boolean[] CMV = new boolean[15];
+
+		Parameter parameters = new Parameter();
+		parameters.dist = 2.0;
+		parameters.nPts = 3;
+		Points[] datapoints1 = {
+			new Points(0.0 , 0.0),
+			new Points(-1.0 , 2.5),
+			new Points(2.0 , 0.0),
+			new Points(0.0 , 2.0)
+		};
+		CMVHandler handler1 = new CMVHandler(parameters,datapoints1);
+		CMV = handler1.generateCMV();
+		assertTrue(CMV[6]);
+    }
+
+    @Test
+    public void testCMV6nice2(){
+        boolean[] CMV = new boolean[15];
+        Parameter parameters = new Parameter();
+        parameters.dist = 1.0;
+        parameters.nPts = 3;
+		Points[] datapoints2 = {
+			new Points(0.0 , 0.0),
+			new Points(-1.0 , 1.0),
+			new Points(0.0 , 0.0),
+			new Points(0.0 , 2.0)
+		};
+		CMVHandler handler2 = new CMVHandler(parameters,datapoints2);
+		CMV = handler2.generateCMV();
+		assertTrue(CMV[6]);
+	}
+
+	@Test 
+	/**
+	 *@result given a set of datapoints with no subset satisfying the condition false is returned
+	 */
+	public void testCMV6bad(){
+		boolean[] CMV = new boolean[15];
+		Parameter parameters = new Parameter();
+		parameters.dist = 20.0;
+		parameters.nPts = 3;
+		Points[] datapoints1 = {};
+		CMVHandler handler1 = new CMVHandler(parameters,datapoints1);
+		CMV = handler1.generateCMV();
+		assertFalse(CMV[6]);
+		Points[] datapoints2 = {
+			new Points(0.0 , 0.0),
+			new Points(1.5 , 0.1),
+			new Points(3.0 , 0.0)
+		};
+		CMVHandler handler2 = new CMVHandler(parameters,datapoints2);
+		CMV = handler2.generateCMV();
+		assertFalse(CMV[6]);
+	}
+	@Test
+	/**
+	 *@result given a set of data where there exists a subset of data
+	 * when the height of the triangle created by the points is less than the
+	 * distance but the distance from any of the end points is greater than dist 
+	 * and the point is also not between the the start and end point
+	 */
+	public void testCMV6InHeightOutside(){
+		boolean[] CMV = new boolean[15];
+		Parameter parameters = new Parameter();
+		parameters.dist = 1.5;
+		parameters.nPts = 3;
+		assertFalse(CMV[6]);
+		Points[] datapoints = {
+			new Points(0.0 , 0.0),
+			new Points(1000 , 1.0),
+			new Points(5.0 , 0.0)
+		};
+		CMVHandler handler2 = new CMVHandler(parameters,datapoints);
+		CMV = handler2.generateCMV();
+		assertTrue(CMV[6]);
+
+	}
+	@Test
+	/**
+	 *@result given a set of data where no point satisfies the condition for CMV[6]
+	 * and if the any point is withi distance of the line between the first point and the
+	 * last point in a given subset is between the first and the last points
+	 * as in on oposite sides of the two points 
+	 */
+	public void testCMV6InHeightInside(){
+		boolean[] CMV = new boolean[15];
+		Parameter parameters = new Parameter();
+		parameters.dist = 1.5;
+		parameters.nPts = 3;
+		assertFalse(CMV[6]);
+		Points[] datapoints = {
+			new Points(0.0 , 0.0),
+			new Points(2.0 , 1.0),
+			new Points(5.0 , 0.0)
+		};
+		CMVHandler handler2 = new CMVHandler(parameters,datapoints);
+		CMV = handler2.generateCMV();
+		assertFalse(CMV[6]);
+
+	}
+
   
     @Test
     /*
@@ -193,6 +300,110 @@ public class CMVHandlerTest{
 		assertFalse(CMV[9]);
   }
     
+	@Test
+	/**
+	 * @result when there exists 3 data points that separated by E_PTS and F_PTS points forms a triangle whose area is greater than AREA1 return true
+	 **/
+	public void testCMV10nice(){
+		boolean[] CMV = new boolean[15];
+
+		Parameter parameters = new Parameter();
+		parameters.area1 = 2.0;
+		parameters.ePts = 1;
+		parameters.fPts = 1;
+		Points[] datapoints = {
+			new Points(0.0 , 0.0),
+			new Points(-1.0 , 2.5),
+			new Points(2.1 , 0.0),
+			new Points(2.0 , 0.0),
+			new Points(0.0 , 2.0)
+		};
+		CMVHandler handler = new CMVHandler(parameters,datapoints);
+		CMV = handler.generateCMV();
+		assertTrue(CMV[10]);
+	}
+
+	@Test 
+	/**
+	 *@result given a set of datapoints with no subset satisfying the condition false is returned
+	 */
+	public void testCMV10bad(){
+		boolean[] CMV = new boolean[15];
+		Parameter parameters = new Parameter();
+		parameters.area1 = 20.0;
+		parameters.ePts = 1;
+		parameters.fPts = 1;
+		Points[] datapoints1 = {};
+		CMVHandler handler1 = new CMVHandler(parameters,datapoints1);
+		CMV = handler1.generateCMV();
+		assertFalse(CMV[10]);
+		Points[] datapoints2 = {
+			new Points(0.0 , 0.0),
+			new Points(0.0 , 0.0),
+			new Points(1.5 , 0.1),
+			new Points(1.5 , 0.1),
+			new Points(3.0 , 0.0)
+		};
+		CMVHandler handler2 = new CMVHandler(parameters,datapoints2);
+		CMV = handler2.generateCMV();
+		assertFalse(CMV[10]);
+	}
+
+	@Test
+	/**
+	 * @result when there exists 2 data points separated by G_PTS points that satisfied X[j]-X[i]<0 (j>i) return true
+	 **/
+	public void testCMV11nice(){
+		boolean[] CMV = new boolean[15];
+
+		Parameter parameters = new Parameter();
+		parameters.gPts = 1;
+		Points[] datapoints1 = {
+			new Points(0.0 , 0.0),
+			new Points(1.0 , 2.5),
+			new Points(2.0 , 0.0),
+			new Points(0.0 , 2.0)
+		};
+		CMVHandler handler1 = new CMVHandler(parameters,datapoints1);
+		CMV = handler1.generateCMV();
+		assertTrue(CMV[11]);
+		parameters.gPts = 2;
+		Points[] datapoints2 = {
+			new Points(4.0 , 0.0),
+			new Points(-1.0 , 1.0),
+			new Points(0.0 , 0.0),
+			new Points(0.0 , 2.0)
+		};
+		CMVHandler handler2 = new CMVHandler(parameters,datapoints2);
+		CMV = handler2.generateCMV();
+		assertTrue(CMV[11]);
+	}
+
+	@Test 
+	/**
+	 *@result given a set of datapoints with no subset satisfying the condition false is returned
+	 */
+	public void testCMV11bad(){
+		boolean[] CMV = new boolean[15];
+		Parameter parameters = new Parameter();
+		parameters.gPts = 1;
+		Points[] datapoints1 = {
+			new Points(1.0 , 0.0),
+			new Points(0.0 , 0.0)
+		};
+		CMVHandler handler1 = new CMVHandler(parameters,datapoints1);
+		CMV = handler1.generateCMV();
+		assertFalse(CMV[11]);
+		Points[] datapoints2 = {
+			new Points(0.0 , 0.0),
+			new Points(1.5 , 0.1),
+			new Points(3.0 , 0.0)
+		};
+		CMVHandler handler2 = new CMVHandler(parameters,datapoints2);
+		CMV = handler2.generateCMV();
+		assertFalse(CMV[11]);
+	}
+
 	@Test
 	/**
 	 * @result when a set of 2 point seperated by kPts points has a distance > length1 also 

@@ -31,8 +31,6 @@ public class GeometryHelperTest{
 		assertTrue(Math.abs(Math.toDegrees(angle)-90.0)<0.00001);
 	}
 
-
-
 	@Test
 	/**
 	 *@result the area of the triangle decided by 3 given points is correctly calculated
@@ -57,6 +55,7 @@ public class GeometryHelperTest{
 		area = GeometryHelper.area(a,b,c);
 		assertTrue(area==2.5);
 	}
+
 	
 	@Test
 	/**
