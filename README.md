@@ -29,7 +29,7 @@ Implemented CMV 6, CMV 10 and CMV 11. Code reviewing and discussions within the 
 - Implemented CMV 8.
 - Implemented FUV.
 - Implemented Launch.
-- Code reviewing.
+- Code reviewing(Pull request etc).
 - Discussions within teh group.
 
 #### François Castle:
