@@ -575,7 +575,6 @@ public class CMVHandlerTest{
     public void testCMV14bad() {
         boolean[] CMV = new boolean[15];
         Parameter parameters = new Parameter();
-        parameters.kPts = 5;
         Points[] dataPoints = {
                 new Points(0.0, 0.0),
                 new Points(0.0, 0.0),
@@ -601,7 +600,6 @@ public class CMVHandlerTest{
     public void testCMV14nice() {
         boolean[] CMV = new boolean[15];
         Parameter parameters = new Parameter();
-        parameters.kPts = 5;
         Points[] dataPoints = {
                 new Points(0.0, 0.0),
                 new Points(0.0, 0.0),
