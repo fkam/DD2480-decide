@@ -419,7 +419,10 @@ public class CMVHandlerTest{
   
      @Test
 	/**
-	 *@result
+	 *@result when there exists a subset of data consiting of
+	 * three points separated by aPts and bPts intervening points respectivly so that 
+	 * there exists an angle between these three points with the second point as vertex
+	 * that is either greater than pi - some epsilon or less than pi + some epsilon true is returned 
 	 */
 	public void testCMV9nice(){
 		boolean[] CMV = new boolean[15];
@@ -441,7 +444,10 @@ public class CMVHandlerTest{
 	}
 	@Test
 	/**
-	 *@result
+	 *@result when there does not exists a subset of data consiting of
+	 * three points separated by aPts and bPts respectivly so that 
+	 * there exists an angle between these three points with the second point as vertex
+	 * that is either greater than pi - some epsilon or less than pi + some epsilon false is returned
 	 */
 	public void testCMV9bad(){
 		boolean[] CMV = new boolean[15];
