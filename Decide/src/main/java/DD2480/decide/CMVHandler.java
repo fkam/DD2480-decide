@@ -151,9 +151,11 @@ public class CMVHandler {
 		}
 		for(int i = 0;i < dataPoints.length-2-parameters.cPts-parameters.dPts;i++){
 
-			if((dataPoints[0].x==dataPoints[parameters.cPts+1].x&&dataPoints[0].y==dataPoints[parameters.cPts+1].y)||
-			   (dataPoints[parameters.cPts+parameters.dPts+2].x==dataPoints[parameters.cPts+1].x&&dataPoints[parameters.cPts+parameters.dPts+2].y==dataPoints[parameters.cPts+1].y)){
-				continue;
+			if((dataPoints[0].x==dataPoints[parameters.cPts+1].x&&
+			    	dataPoints[0].y==dataPoints[parameters.cPts+1].y)||
+			   (dataPoints[parameters.cPts+parameters.dPts+2].x==dataPoints[parameters.cPts+1].x&&
+			    	dataPoints[parameters.cPts+parameters.dPts+2].y==dataPoints[parameters.cPts+1].y)){
+					continue;
 			}
 			//get angle see if it is within the boundries
 			double angle = GeometryHelper.angle(dataPoints[0],dataPoints[parameters.cPts+1],dataPoints[parameters.cPts+parameters.dPts+2]);
