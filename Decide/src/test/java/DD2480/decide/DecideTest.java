@@ -72,14 +72,7 @@ public class DecideTest{
         assertTrue(decide.Decide());
         lcm = new Lcm();
     }
-        @Test
-    public void derp(){
-    	CMVHandler handler = new CMVHandler(parameters,points);
-    	boolean[] cmv = handler.generateCMV();
-    	for(int i = 0 ; i < 15; i ++){
-    		System.out.println(cmv[i]);
-    	}
-    }
+
     @Test
     /**
      *@result if there exists an ANDD entry in the lcm at position (i,j)
