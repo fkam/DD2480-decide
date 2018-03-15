@@ -1,7 +1,5 @@
 package DD2480.decide;
 
-import java.lang.Math;
-
 public class CMVHandler {
 	
 	boolean[] CMV = new boolean[15]; 
@@ -83,8 +81,11 @@ public class CMVHandler {
 	}
 
 	private boolean licThree() {
-		// TODO Auto-generated method stub
-		return false;
+        for (int index = 0; index < dataPoints.length - 2; index++) {
+            if (GeometryHelper.area(dataPoints[index], dataPoints[index + 1], dataPoints[index + 2]) > parameters.area1)
+                return true;
+        }
+        return false;
 	}
 
 	private boolean licFour() {
