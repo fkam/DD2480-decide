@@ -252,7 +252,26 @@ public class CMVHandler {
 	}
 
 	private boolean licThirteen() {
-		// TODO Auto-generated method stub
+        if (dataPoints.length < 5) {
+            return false;
+        }
+        boolean condition1 = false;
+        boolean condition2 = false;
+
+        for (int index = 0; index < dataPoints.length - (parameters.aPts + parameters.bPts + 2); index++) {
+            Points p1 = dataPoints[index];
+            Points p2 = dataPoints[index + parameters.aPts + 1];
+            Points p3 = dataPoints[index + parameters.aPts + 2 + parameters.bPts];
+            if(!GeometryHelper.pointsWithinACircle(p1,p2,p3,parameters.radius1)){
+            	condition1 = true;
+            }
+            if(!GeometryHelper.pointsWithinACircle(p1,p2,p3,parameters.radius2)){
+            	condition2 = true;
+            }
+        }
+        if(condition1&&condition2){
+        	return true;
+        }
 		return false;
 	}
 
