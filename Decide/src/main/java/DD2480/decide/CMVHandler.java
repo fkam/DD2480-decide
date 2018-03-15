@@ -54,29 +54,9 @@ public class CMVHandler {
 		if(dataPoints.length<3){
 			return false;
 		}
-		//first 3 consecutive datapoints
-		Points first = dataPoints[0];
-		Points second = dataPoints[1];
-		Points third = dataPoints[2];
-		boolean keepSearching = (dataPoints.length>3) ? true : false;
-		for(int i = 2; i<dataPoints.length;){
-			//calculate point equidistant from all 3 points
-			double centerX = (first.x + second.x + third.x)/3;
-			double centerY = (first.y + second.y + third.y)/3;
-			Points center = new Points(centerX,centerY);
-			//if the distance is between the center of the circle and the 
-			//3 points return true
-			if(center.distance(first) > parameters.radius1 ||
-			   center.distance(second)> parameters.radius1 ||
-			   center.distance(third) > parameters.radius1){
+		for(int i = 0; i<dataPoints.length-2;i++){
+			if(!GeometryHelper.pointsWithinACircle(dataPoints[i],dataPoints[i+1],dataPoints[i+2],parameters.radius1)){
 				return true;
-			}
-			i++;
-			//shift the consecutive datapoint forward one step if we have a set of points larger than 3
-			if(keepSearching){
-				first = second;
-				second = third;
-				third = dataPoints[i];
 			}
 		}
 		//if no point found return false
@@ -87,29 +67,16 @@ public class CMVHandler {
 		if(dataPoints.length<3){
 			return false;
 		}
-		boolean keepSearching = (dataPoints.length>3) ? true : false;
-		//first 3 consecutive datapoints
-		Points first = dataPoints[0];
-		Points second = dataPoints[1];
-		Points third = dataPoints[2];
-		for(int i = 2;i <dataPoints.length;i++){
-			
+		for(int i = 0;i <dataPoints.length-2;i++){	
 			//considered unsatisifed if any of point 1 or 3 is coincide with point 2
-			if((first.x==second.x&&first.y==second.y)||(third.x==second.x&&third.y==second.y)){
+			if((dataPoints[i].x==dataPoints[i+1].x&&dataPoints[i].y==dataPoints[i+1].y)||(dataPoints[i+2].x==dataPoints[i+1].x&&dataPoints[i+2].y==dataPoints[i+1].y)){
 				continue;
 			}
 			//get angle see if it is within the boundries
-			double angle = GeometryHelper.angle(first,second,third);
+			double angle = GeometryHelper.angle(dataPoints[i],dataPoints[i+1],dataPoints[i+2]);
 			if((angle<Math.PI -parameters.epsilon)||(angle>Math.PI+parameters.epsilon)){
 				return true;
 			}
-
-			if(keepSearching){
-				first = second;
-				second = third;
-				third = dataPoints[i+1];
-			}
-			
 		}
 		return false;
 
@@ -131,13 +98,58 @@ public class CMVHandler {
 	}
 
 	private boolean licSix() {
-		// TODO Auto-generated method stub
+		if(parameters.nPts < 3 || parameters.nPts > dataPoints.length || parameters.dist < 0)
+			return false;
+		for(int i = 0;i < dataPoints.length-parameters.nPts+1;i++){
+			int k = i + parameters.nPts - 1;
+			if(dataPoints[i].x == dataPoints[k].x && dataPoints[i].y == dataPoints[k].y){
+				for(int j = i+1;j<k;j++){
+
+					if(dataPoints[j].distance(dataPoints[i])>parameters.dist)
+						return true;	
+				}
+			} else {
+				double d = dataPoints[i].distance(dataPoints[k]);
+				for(int j = i+1;j<k;j++){
+					double s = GeometryHelper.area(dataPoints[i], dataPoints[k], dataPoints[j]);
+					double l = s / d * 2.0;
+					if(l > parameters.dist){
+						return true;
+					}
+					else if(l < parameters.dist&&
+						dataPoints[i].distance(dataPoints[j])>parameters.dist&&
+						dataPoints[k].distance(dataPoints[j])>parameters.dist&&
+						(Math.sqrt(Math.pow(dataPoints[i].distance(dataPoints[k]),2)+(parameters.dist*parameters.dist))<
+						 Math.max(dataPoints[i].distance(dataPoints[k]),dataPoints[k].distance(dataPoints[j])))){
+								return true;
+					}
+				}
+			}
+		}
 		return false;
 	}
-
+    /*
+     * There exits at least one set of two data points separated by exactly kPts consecutive intervening points that are a distance greater than the length,
+     * LENGTH1, apart. The condition is not met whe NUMPOINTS < 3. 1 =< kPts =< NUMPOINTS - 2.
+     */
 	private boolean licSeven() {
-		// TODO Auto-generated method stub
-		return false;
+        Points  dp1, dp2;
+        if (dataPoints.length < 3){
+            return false;
+        }
+        if (1 > parameters.kPts || parameters.kPts > (dataPoints.length - 2)){
+            return false;
+        }
+        for (int i = 0; i < dataPoints.length - parameters.kPts - 1; i++){
+            dp1 = dataPoints[i];
+            dp2 = dataPoints[i + parameters.kPts + 1];
+
+            double dist = dp1.distance(dp2);
+            if (dist > parameters.length1){
+                return true;
+            }
+        }
+        return false;
 	}
 
 	private boolean licEigth() {
@@ -149,41 +161,42 @@ public class CMVHandler {
 		if(dataPoints.length<5||parameters.cPts+parameters.dPts>dataPoints.length-3){
 			return false;
 		}
-		boolean keepSearching = (dataPoints.length>3+parameters.cPts+parameters.dPts) ? true : false;
-		//first 3 consecutive datapoints
-		Points first = dataPoints[0];
-		Points second = dataPoints[parameters.cPts+1];
-		Points third = dataPoints[parameters.cPts+parameters.dPts+2];
-		int pos = 0;
-		for(int i = 2+parameters.cPts+parameters.dPts;i < dataPoints.length;i++){
+		for(int i = 0;i < dataPoints.length-2-parameters.cPts-parameters.dPts;i++){
 
-			if((first.x==second.x&&first.y==second.y)||(third.x==second.x&&third.y==second.y)){
-				continue;
+			if((dataPoints[0].x==dataPoints[parameters.cPts+1].x&&
+			    	dataPoints[0].y==dataPoints[parameters.cPts+1].y)||
+			   (dataPoints[parameters.cPts+parameters.dPts+2].x==dataPoints[parameters.cPts+1].x&&
+			    	dataPoints[parameters.cPts+parameters.dPts+2].y==dataPoints[parameters.cPts+1].y)){
+					continue;
 			}
 			//get angle see if it is within the boundries
-			double angle = GeometryHelper.angle(first,second,third);
+			double angle = GeometryHelper.angle(dataPoints[0],dataPoints[parameters.cPts+1],dataPoints[parameters.cPts+parameters.dPts+2]);
 			if((angle<Math.PI -parameters.epsilon)||(angle>Math.PI+parameters.epsilon)){
 				return true;
 			}
-
-			if(keepSearching&&(pos+parameters.cPts+parameters.dPts+2)>=dataPoints.length){
-				pos++;
-				first = dataPoints[pos];
-				second = dataPoints[pos+parameters.cPts+1];
-				third = dataPoints[pos+parameters.cPts+parameters.dPts+2];
-			}
-
 		}
 		return false;
 	}
 
 	private boolean licTen() {
-		// TODO Auto-generated method stub
+		if(parameters.ePts < 1 || parameters.fPts < 1 || parameters.ePts+parameters.fPts+3 > dataPoints.length)
+			return false;
+		for(int i = 0;i<dataPoints.length-parameters.ePts-parameters.fPts-2;i++){
+			double s = GeometryHelper.area(dataPoints[i], dataPoints[i+parameters.ePts+1],
+                         dataPoints[i+parameters.ePts+parameters.fPts+2]);
+			if(s > parameters.area1)
+				return true;
+		}
 		return false;
 	}
 
 	private boolean licEleven() {
-		// TODO Auto-generated method stub
+		if(parameters.gPts < 1 || parameters.gPts > dataPoints.length - 2)
+			return false;
+		for(int i = 0;i<dataPoints.length-parameters.gPts-1;i++){
+			if(dataPoints[i+parameters.gPts+1].x-dataPoints[i].x<0)
+				return true;
+		}
 		return false;
 	}
 	

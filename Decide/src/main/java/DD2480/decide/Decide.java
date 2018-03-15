@@ -17,7 +17,7 @@ public class Decide {
 		
 	}
 	
-	public Decide( Parameter parameters, Lcm LCM, boolean[] PUV,  Points[] dataPoints) {
+	public boolean Decide( Parameter parameters, Lcm LCM, boolean[] PUV,  Points[] dataPoints) {
 		this.parameters = parameters;
 		this.LCM = LCM;
 		this.PUV = PUV;
@@ -26,6 +26,7 @@ public class Decide {
 		CMV = generateCMV();
 		PUM = generatePUM();
 		FUV = generateFUV();
+    return launch();
 	}
 
 	private boolean[] generateCMV() {
@@ -38,11 +39,18 @@ public class Decide {
 	}
 	
 	private boolean[] generateFUV() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-    	public boolean launch(){
+	    for(int i = 0; i < FUV.length; i++){
+            if(!PUV[i] || checkArray(PUM[i], i)){
+                FUV[i] = true;
+            } else {
+                FUV[i] = false;
+            }  
+        }
+        return FUV;
+    }
+    
+  
+    private boolean launch(){
         	for(int i = 0; i < FUV.length; i++){
             	if (!FUV[i]){
                 	System.out.println("NO");
@@ -53,5 +61,17 @@ public class Decide {
         	return true;
     }
 
-	
+    private boolean checkArray(boolean[] array, int i){
+        int j = 0;
+        for(boolean x : array){
+            if (j == i){
+                j++;
+                continue;
+            }
+            if (!x){
+                return false;
+            } j++;
+        }
+	    return true;
+    }
 }
