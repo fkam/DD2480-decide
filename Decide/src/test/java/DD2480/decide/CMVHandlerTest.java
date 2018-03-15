@@ -172,6 +172,48 @@ public class CMVHandlerTest{
 		assertTrue(CMV[6]);
     }
 
+
+    @Test
+    /**
+     *@result given a set of datapoints with no subset satisfying the condition true is returned
+     **/
+    public void testCMV4nice() {
+        boolean[] CMV = new boolean[15];
+
+        Parameter parameters = new Parameter();
+        parameters.quads = 2;
+        parameters.nPts = 3;
+        Points[] datapoints1 = {
+                new Points(1.0, 1.0),
+                new Points(-1.0, 1.0),
+                new Points(-3.0, -3.0),
+        };
+        CMVHandler handler1 = new CMVHandler(parameters, datapoints1);
+        CMV = handler1.generateCMV();
+        assertTrue(CMV[4]);
+    }
+
+    @Test
+    /**
+     *@result given a set of datapoints with no subset satisfying the condition false is returned
+     */
+    public void testCMV4bad() {
+        boolean[] CMV = new boolean[15];
+
+        Parameter parameters = new Parameter();
+        parameters.quads = 2;
+        parameters.nPts = 3;
+        Points[] datapoints1 = {
+                new Points(1.0, 1.0),
+                new Points(-1.0, 1.0),
+                new Points(0.0, 0.0),
+                new Points(0.0, -2.0),
+        };
+        CMVHandler handler1 = new CMVHandler(parameters, datapoints1);
+        CMV = handler1.generateCMV();
+        assertFalse(CMV[4]);
+    }
+
     @Test
     public void testCMV6nice2(){
         boolean[] CMV = new boolean[15];
