@@ -72,6 +72,14 @@ public class DecideTest{
         assertTrue(decide.Decide());
         lcm = new Lcm();
     }
+        @Test
+    public void derp(){
+    	CMVHandler handler = new CMVHandler(parameters,points);
+    	boolean[] cmv = handler.generateCMV();
+    	for(int i = 0 ; i < 15; i ++){
+    		System.out.println(cmv[i]);
+    	}
+    }
     @Test
     /**
      *@result if there exists an ANDD entry in the lcm at position (i,j)
@@ -87,6 +95,26 @@ public class DecideTest{
         }
         lcm.setElement(0,1,Lcm.lcmElement.ANDD);
         assertTrue(lcm.getElement(0,1).toString()=="ANDD");
+        Decide decide = new Decide(parameters,lcm,puv,points);
+        assertTrue(decide.Decide());
+        Arrays.fill(puv,false);
+        lcm = new Lcm();
+    }
+     @Test
+    /**
+     *@result if there exists an ORR entry in the lcm at position (i,j)
+     * then if either CMV[i] and CMV[j] are true the corresponding entry in the PUM
+     * at position (i,j) should be set to true
+     */
+    public void testPUMEvaluateTrueForORR(){
+    	Arrays.fill(puv,false);
+    	puv[0] = true;
+    	int i = 0;
+    	for (int j = 0; j < 15; j++){
+            lcm.setElement(i, j, Lcm.lcmElement.NOTUSED);
+        }
+        lcm.setElement(0,9,Lcm.lcmElement.ORR);
+        assertTrue(lcm.getElement(0,9).toString()=="ORR");
         Decide decide = new Decide(parameters,lcm,puv,points);
         assertTrue(decide.Decide());
         Arrays.fill(puv,false);
