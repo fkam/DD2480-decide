@@ -128,8 +128,9 @@ public class CMVHandlerTest{
         CMVHandler handler = new CMVHandler(parameters, datapoints);
         CMV = handler.generateCMV();
         assertTrue(CMV[5]);
-
-    @Test
+    }
+  
+     @Test
     /**
      *@result given a set of datapoints with no subset satisfying the condition false is returned
      */
@@ -167,11 +168,12 @@ public class CMVHandlerTest{
         CMV = handler.generateCMV();
         assertFalse(CMV[5]);
     }
-       @Test
+
+    @Test
     /**
      *@result given a set of datapoints with no subset satisfying the condition false is returned
      */
-      public void testCMV3bad() {
+    public void testCMV3bad() {
         boolean[] CMV = new boolean[15];
         Parameter parameters = new Parameter();
         Points[] datapoints = {
