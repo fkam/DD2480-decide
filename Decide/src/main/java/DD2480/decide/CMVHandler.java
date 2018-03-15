@@ -248,24 +248,29 @@ public class CMVHandler {
         if (dataPoints.length < 5) {
             return false;
         }
+        boolean condition1 = false;
+        boolean condition2 = false;
 
         for (int index = 0; index < dataPoints.length - (parameters.aPts + parameters.bPts + 2); index++) {
             Points p1 = dataPoints[index];
             Points p2 = dataPoints[index + parameters.aPts + 1];
             Points p3 = dataPoints[index + parameters.aPts + 2 + parameters.bPts];
-            double d1 = p1.distance(p2);
-            double d2 = p2.distance(p3);
-            double d3 = p1.distance(p3);
-
-            if (Math.max(Math.max(d1, d2), d3) > (2 * parameters.radius1) && Math.max(Math.max(d1, d2), d3) < (2 * parameters.radius2))
-                return true;
+        
+            if(!GeometryHelper.pointsWithinACircle(p1,p2,p3,parameters.radius1)){
+                condition1 = true;
+            }
+            if(!GeometryHelper.pointsWithinACircle(p1,p2,p3,parameters.radius2)){
+                condition2 = true;
+            }
         }
+        if(condition1&&condition2){
+            return true;
+        }
+        return false;
+    }
 
-		return false;
-	}
-
-	private boolean licFourteen() {
-		// TODO Auto-generated method stub
-		return false;
-	}	
+    private boolean licFourteen() {
+        // TODO Auto-generated method stub
+        return false;
+    }	
 }
