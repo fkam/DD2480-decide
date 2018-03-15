@@ -19,6 +19,7 @@ Each public function and whole system implementation is tested under test folder
 Contributed by writing code and improving upon such as the functionally for generating Lic 1,2,6,7 also code in help functions such as the Lcm class and angle function in GeometryHelper reviewed code during pull request and took part in several discussions regarding code and implementation.
 
 #### Jiayu Sun:
+Implemented CMV 6, CMV 10 and CMV 11. Code reviewing and discussions within the group.
 
 #### Felix Kam:
 - Contributed with creating the code structure.
