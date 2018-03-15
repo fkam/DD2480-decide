@@ -202,6 +202,7 @@ public class CMVHandlerTest{
 
         Parameter parameters = new Parameter();
         parameters.quads = 2;
+	parameters.qPts = 2;
         Points[] datapoints1 = {
                 new Points(1.0, 1.0),
                 new Points(-1.0, 1.0),
