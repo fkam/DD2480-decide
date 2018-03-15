@@ -152,10 +152,40 @@ public class CMVHandler {
         return false;
 	}
 
-	private boolean licEigth() {
-		// TODO Auto-generated method stub
-		return false;
-	}
+    /*There exists at least one set of three data points separated by exactly A_PTS and B_PTS
+     *consecutive intervening points, respectively, that cannot be contained within or on a circle of
+     *radius RADIUS1. The condition is not met when NUMPOINTS < 5.
+     *1 =< A_PTS, 1 =< B_PTS
+     *A_PTS+B_PTS =< (NUMPOINTS - 3)
+     */
+
+    private boolean licEigth() {
+        Points dp1, dp2, dp3;
+        if (dataPoints.length < 5){
+            return false;
+        }
+        if (parameters.aPts < 1 || parameters.bPts < 1){
+            return false;
+        }
+        if (parameters.aPts + parameters.bPts > (dataPoints.length -3)){
+            return false;
+        }
+        if (parameters.radius1 < 0){
+            return false;
+        }
+        for (int i = 0; i < dataPoints.length - parameters.aPts - parameters.bPts - 2; i++){
+            dp1 = dataPoints[i];
+            dp2 = dataPoints[i + parameters.aPts + 1];
+            dp3 = dataPoints[i + parameters.aPts + parameters.bPts + 2];
+
+            boolean circle = GeometryHelper.pointsWithinACircle(dp1, dp2, dp3, parameters.radius1);
+                if (!circle){
+                    return true;
+                }
+        }
+
+        return false;
+    }
 
 	private boolean licNine() {
 		if(dataPoints.length<5||parameters.cPts+parameters.dPts>dataPoints.length-3){

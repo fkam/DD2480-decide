@@ -253,9 +253,44 @@ public class CMVHandlerTest{
         assertTrue(CMV[7]);
     }         
 
-            
+    /*
+     * @result - returns return false when the radius for a circle is negative
+     * or when aPts or bPts is less than 1
+     * or if the amount of data points is less than 5
+     */
+    @Test
+    public void test1CMVEight(){
+        boolean[] CMV = new boolean[15];
+        Parameter parameters = new Parameter();
+        parameters.aPts = 0;
+        Points[] dataPoints = {};
+        CMVHandler handler = new CMVHandler(parameters, dataPoints);
+        CMV = handler.generateCMV();
+        assertFalse(CMV[8]);
+        parameters.bPts = 0;
+        CMV = handler.generateCMV();
+        assertFalse(CMV[8]);
+        parameters.radius1 = 0;
+        CMV = handler.generateCMV();
+        assertFalse(CMV[8]);
+    }
+    /*
+     * @results - returns false if aPts + bPts is greater than length of dataPoints subtract by 3
+     */
+    @Test
+    public void test2CMVEight(){
+        boolean[] CMV = new boolean[15];
+        Parameter parameters = new Parameter();
+        Points[] dataPoints = {};
+        parameters.aPts = 1;
+        parameters.bPts = 1;
+        CMVHandler handler = new CMVHandler(parameters, dataPoints);
+        CMV = handler.generateCMV();
+        assertFalse(CMV[8]);
+    }
+ 
   
-  @Test
+     @Test
 	/**
 	 *@result
 	 */
