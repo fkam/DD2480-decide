@@ -33,8 +33,31 @@ public class Decide {
 	}
 	
 	private boolean[][] generatePUM() {
-		// TODO Auto-generated method stub
-		return null;
+		boolean toBeReturned [][] = new boolean[15][15];
+		for(int i = 0;i<14;i++){
+			for( int j = 0;i<14;i++){
+				switch (LCM.getElement(i,j)) {
+					case ANDD:
+						if(CMV[i] &&CMV[j]){
+							toBeReturned[i][j] = false;
+						}else{
+							toBeReturned[i][j] = true;
+						}
+						break;
+					case ORR:
+						if(CMV[i]||CMV[j]){
+							toBeReturned[i][j] = true;
+						}
+						else{
+							toBeReturned[i][j] = false;
+						}
+						break;
+					case NOTUSED:
+						toBeReturned[i][j] = true;					
+				}
+			}
+		}
+		return toBeReturned;
 	}
 	
 	private boolean[] generateFUV() {
