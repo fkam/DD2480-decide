@@ -2,7 +2,8 @@ package DD2480.decide;
 
 import org.junit.Test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 public class CMVHandlerTest{
 
@@ -109,6 +110,46 @@ public class CMVHandlerTest{
 		CMV = handler.generateCMV();
 		assertFalse(CMV[2]);
 	}
+
+    @Test
+    /**
+     *@result given a set of datapoints with no subset satisfying the condition false is returned
+     */
+    public void testCMV3nice() {
+        boolean[] CMV = new boolean[15];
+        Parameter parameters = new Parameter();
+        Points[] datapoints = {
+                new Points(-1.0, -1.0),
+                new Points(0.0, 0.0),
+                new Points(0.0, 4.0),
+                new Points(5.0, 0.0),
+                new Points(8.0, 3.0)
+        };
+        parameters.area1 = 3;
+        CMVHandler handler = new CMVHandler(parameters, datapoints);
+        CMV = handler.generateCMV();
+        assertTrue(CMV[3]);
+    }
+
+    @Test
+    /**
+     *@result given a set of datapoints with no subset satisfying the condition false is returned
+     */
+    public void testCMV3bad() {
+        boolean[] CMV = new boolean[15];
+        Parameter parameters = new Parameter();
+        Points[] datapoints = {
+                new Points(-1.0, -1.0),
+                new Points(0.0, 0.0),
+                new Points(0.0, 4.0),
+                new Points(5.0, 0.0),
+                new Points(8.0, 3.0)
+        };
+        parameters.area1 = 20;
+        CMVHandler handler = new CMVHandler(parameters, datapoints);
+        CMV = handler.generateCMV();
+        assertFalse(CMV[3]);
+    }
 
 	@Test
 	/**
