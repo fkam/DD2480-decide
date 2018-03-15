@@ -149,30 +149,17 @@ public class CMVHandler {
 		if(dataPoints.length<5||parameters.cPts+parameters.dPts>dataPoints.length-3){
 			return false;
 		}
-		boolean keepSearching = (dataPoints.length>3+parameters.cPts+parameters.dPts) ? true : false;
-		//first 3 consecutive datapoints
-		Points first = dataPoints[0];
-		Points second = dataPoints[parameters.cPts+1];
-		Points third = dataPoints[parameters.cPts+parameters.dPts+2];
-		int pos = 0;
-		for(int i = 2+parameters.cPts+parameters.dPts;i < dataPoints.length;i++){
+		for(int i = 0;i < dataPoints.length-2-parameters.cPts-parameters.dPts;i++){
 
-			if((first.x==second.x&&first.y==second.y)||(third.x==second.x&&third.y==second.y)){
+			if((dataPoints[0].x==dataPoints[parameters.cPts+1].x&&dataPoints[0].y==dataPoints[parameters.cPts+1].y)||
+			   (dataPoints[parameters.cPts+parameters.dPts+2].x==dataPoints[parameters.cPts+1].x&&dataPoints[parameters.cPts+parameters.dPts+2].y==dataPoints[parameters.cPts+1].y)){
 				continue;
 			}
 			//get angle see if it is within the boundries
-			double angle = GeometryHelper.angle(first,second,third);
+			double angle = GeometryHelper.angle(dataPoints[0],dataPoints[parameters.cPts+1],dataPoints[parameters.cPts+parameters.dPts+2]);
 			if((angle<Math.PI -parameters.epsilon)||(angle>Math.PI+parameters.epsilon)){
 				return true;
 			}
-
-			if(keepSearching&&(pos+parameters.cPts+parameters.dPts+2)>=dataPoints.length){
-				pos++;
-				first = dataPoints[pos];
-				second = dataPoints[pos+parameters.cPts+1];
-				third = dataPoints[pos+parameters.cPts+parameters.dPts+2];
-			}
-
 		}
 		return false;
 	}
