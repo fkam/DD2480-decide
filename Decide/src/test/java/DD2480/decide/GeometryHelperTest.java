@@ -31,8 +31,6 @@ public class GeometryHelperTest{
 		assertTrue(Math.abs(Math.toDegrees(angle)-90.0)<0.00001);
 	}
 
-
-
 	@Test
 	/**
 	 *@result the area of the triangle decided by 3 given points is correctly calculated
@@ -57,7 +55,7 @@ public class GeometryHelperTest{
 		area = GeometryHelper.area(a,b,c);
 		assertTrue(area==2.5);
 	}
-	
+
 	@Test
 	/**
 	 *@result Three point 0;0 , 1;0 , 4,0 with radious 2 should return true
@@ -78,6 +76,7 @@ public class GeometryHelperTest{
 		assertTrue(check3);
 		
 	}
+  
 	@Test
 	/**
 	 *@result Three point 0;0 , 1;0 , 4,0 with radious 1.99 should return false
@@ -89,6 +88,7 @@ public class GeometryHelperTest{
 		boolean check1 = GeometryHelper.pointsWithinACircle(a, b, c, r);
 		assertFalse(check1);
 	}
+  
 	@Test
 	/**
 	 *@result Three point 0;0 , 2;sqrt(12) , 4,0 with radious 2.31 should return true and
@@ -107,4 +107,5 @@ public class GeometryHelperTest{
 		boolean check2 = GeometryHelper.pointsWithinACircle(a, b, c, r);
 		assertFalse(check2);
 	}
+
 }
