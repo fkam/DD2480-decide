@@ -71,6 +71,7 @@ public class CMVHandlerTest{
 		assertTrue(CMV[1]);
 	}
 
+
 	@Test 
 	/**
 	 *@result given a set of data points with a subset satisfying the condition true is returned
@@ -90,6 +91,7 @@ public class CMVHandlerTest{
 		CMV = handler.generateCMV();
 		assertTrue(CMV[2]);
 	}
+  
 	@Test 
 	/**
 	 *@result given a set of datapoints with no subset satisfying the condition false is returned
@@ -215,7 +217,45 @@ public class CMVHandlerTest{
 
 	}
 
-	@Test
+  
+    @Test
+    /*
+     * @results - returns false when the length(NUMPOINTS) of data points is less then 3.
+     */
+    public void test1CMVSeven(){
+        boolean[] CMV = new boolean[15];
+        Parameter parameters = new Parameter();
+        Points[] dataPoints = {
+            new Points(0.0, 0.0),
+            new Points(1.0, 0.0)
+        };
+        CMVHandler handler = new CMVHandler(parameters, dataPoints);
+        CMV = handler.generateCMV();
+        assertFalse(CMV[7]);
+    }
+    
+    /*
+     * @resulsts - returns true when there exists at least one set of two data points separated by kPts.
+     */
+    @Test
+    public void test2CMVSeven(){
+        Parameter parameters = new Parameter();
+        boolean[] CMV = new boolean[15];
+        Points[] dataPoints = {
+            new Points(0.0, 0.0),
+            new Points(1.0, 0.0),
+            new Points(5.0, 5.0)
+        };  
+        parameters.kPts = 1;
+        parameters.length1 = 3;
+        CMVHandler handler = new CMVHandler(parameters, dataPoints);
+        CMV = handler.generateCMV();                   
+        assertTrue(CMV[7]);
+    }         
+
+            
+  
+  @Test
 	/**
 	 *@result
 	 */
@@ -414,4 +454,7 @@ public class CMVHandlerTest{
 
 	}
 }
+
+
+
 
