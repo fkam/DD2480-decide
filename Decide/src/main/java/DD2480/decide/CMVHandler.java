@@ -87,29 +87,16 @@ public class CMVHandler {
 		if(dataPoints.length<3){
 			return false;
 		}
-		boolean keepSearching = (dataPoints.length>3) ? true : false;
-		//first 3 consecutive datapoints
-		Points first = dataPoints[0];
-		Points second = dataPoints[1];
-		Points third = dataPoints[2];
-		for(int i = 2;i <dataPoints.length;i++){
-			
+		for(int i = 0;i <dataPoints.length-2;i++){	
 			//considered unsatisifed if any of point 1 or 3 is coincide with point 2
-			if((first.x==second.x&&first.y==second.y)||(third.x==second.x&&third.y==second.y)){
+			if((dataPoints[i].x==dataPoints[i+1].x&&dataPoints[i].y==dataPoints[i+1].y)||(dataPoints[i+2].x==dataPoints[i+1].x&&dataPoints[i+2].y==dataPoints[i+1].y)){
 				continue;
 			}
 			//get angle see if it is within the boundries
-			double angle = GeometryHelper.angle(first,second,third);
+			double angle = GeometryHelper.angle(dataPoints[i],dataPoints[i+1],dataPoints[i+2]);
 			if((angle<Math.PI -parameters.epsilon)||(angle>Math.PI+parameters.epsilon)){
 				return true;
 			}
-
-			if(keepSearching){
-				first = second;
-				second = third;
-				third = dataPoints[i+1];
-			}
-			
 		}
 		return false;
 
