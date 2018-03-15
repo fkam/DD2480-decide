@@ -130,7 +130,7 @@ public class CMVHandlerTest{
         CMV = handler.generateCMV();
         assertTrue(CMV[3]);
     }
-
+  
     @Test
     /**
      *@result given a set of datapoints with no subset satisfying the condition false is returned
@@ -150,30 +150,9 @@ public class CMVHandlerTest{
         CMV = handler.generateCMV();
         assertFalse(CMV[3]);
     }
+  
 
-	@Test
-	/**
-	 * @result when there exists at least 1 data point that lies a distance greater than DIST from the line return true
-	 **/
-	public void testCMV6nice1(){
-		boolean[] CMV = new boolean[15];
-
-		Parameter parameters = new Parameter();
-		parameters.dist = 2.0;
-		parameters.nPts = 3;
-		Points[] datapoints1 = {
-			new Points(0.0 , 0.0),
-			new Points(-1.0 , 2.5),
-			new Points(2.0 , 0.0),
-			new Points(0.0 , 2.0)
-		};
-		CMVHandler handler1 = new CMVHandler(parameters,datapoints1);
-		CMV = handler1.generateCMV();
-		assertTrue(CMV[6]);
-    }
-
-
-    @Test
+   @Test
     /**
      *@result given a set of datapoints with no subset satisfying the condition true is returned
      **/
@@ -202,7 +181,7 @@ public class CMVHandlerTest{
 
         Parameter parameters = new Parameter();
         parameters.quads = 2;
-	parameters.qPts = 2;
+	      parameters.qPts = 2;
         Points[] datapoints1 = {
                 new Points(1.0, 1.0),
                 new Points(-1.0, 1.0),
@@ -213,6 +192,70 @@ public class CMVHandlerTest{
         CMV = handler1.generateCMV();
         assertFalse(CMV[4]);
     }
+
+    @Test
+    /**
+     *@result given a set of data points with a subset satisfying the condition true is returned
+     */
+    public void testCMV5nice() {
+        boolean[] CMV = new boolean[15];
+        Parameter parameters = new Parameter();
+        parameters.nPts = 4;
+        Points[] datapoints = {
+                new Points(1.0, 1.0),
+                new Points(0.0, 1.0),
+                new Points(2.0, 2.0),
+                new Points(3.0, 2.0),
+        };
+        CMVHandler handler = new CMVHandler(parameters, datapoints);
+        CMV = handler.generateCMV();
+        assertTrue(CMV[5]);
+    }
+  
+    @Test
+    /**
+     *@result given a set of datapoints with no subset satisfying the condition false is returned
+     */
+    public void testCMV5bad() {
+        boolean[] CMV = new boolean[15];
+        Parameter parameters = new Parameter();
+        parameters.nPts = 4;
+        Points[] datapoints = {
+                new Points(1.0, 1.0),
+                new Points(1.0, 1.0),
+                new Points(2.0, 2.0),
+                new Points(3.0, 2.0),
+        };
+        CMVHandler handler = new CMVHandler(parameters, datapoints);
+        CMV = handler.generateCMV();
+        assertFalse(CMV[5]);
+    }
+  
+   
+
+	@Test
+	/**
+	 * @result when there exists at least 1 data point that lies a distance greater than DIST from the line return true
+	 **/
+	public void testCMV6nice1(){
+		boolean[] CMV = new boolean[15];
+
+		Parameter parameters = new Parameter();
+		parameters.dist = 2.0;
+		parameters.nPts = 3;
+		Points[] datapoints1 = {
+			new Points(0.0 , 0.0),
+			new Points(-1.0 , 2.5),
+			new Points(2.0 , 0.0),
+			new Points(0.0 , 2.0)
+		};
+		CMVHandler handler1 = new CMVHandler(parameters,datapoints1);
+		CMV = handler1.generateCMV();
+		assertTrue(CMV[6]);
+    }
+
+
+    
 
     @Test
     public void testCMV6nice2(){
@@ -253,6 +296,7 @@ public class CMVHandlerTest{
 		CMV = handler2.generateCMV();
 		assertFalse(CMV[6]);
 	}
+
 	@Test
 	/**
 	 *@result given a set of data where there exists a subset of data
@@ -571,6 +615,60 @@ public class CMVHandlerTest{
 		assertTrue(CMV[12]);
 
 	}
+
+    @Test
+    /**
+     *@result given a set of datapoints with no subset satisfying the condition false is returned
+     */
+    public void testCMV13() {
+        boolean[] CMV = new boolean[15];
+        Parameter parameters = new Parameter();
+        parameters.radius1 = 1.0;
+        parameters.radius2 = 3.0;
+        parameters.aPts = 1;
+        parameters.bPts = 2;
+
+        Points[] datapoints = {
+                new Points(0.0, 0.0),
+                new Points(0.0, 0.0),
+                new Points(3.0, 0.0),
+                new Points(4.0, 0.0),
+                new Points(0.0, 0.0),
+                new Points(1.0, 0.0),
+                new Points(0.0, 5.0),
+        };
+        CMVHandler handler = new CMVHandler(parameters, datapoints);
+        CMV = handler.generateCMV();
+        assertTrue(CMV[13]);
+    }
+
+    @Test
+    /**
+     * @result given a set of datapoint which contain subsets of data which
+     * satisfy each condition individually but not at the same time true is returned.
+     */
+     public void testCMV13conditionsMetOndifferentSubsets(){
+         boolean[] CMV = new boolean[15];
+         Parameter parameters = new Parameter();
+         parameters.radius1 = 3.0;
+         parameters.radius2 = 1.0;
+         parameters.aPts = 1;
+         parameters.bPts = 1;
+
+         Points[] datapoints = {
+             new Points(0.0, 0.0),
+             new Points(0.0, 0.0),
+             new Points(3.5, 0.0),
+             new Points(1.0, 0.0),
+             new Points(0.0, 0.0),
+             new Points(1.0, 0.0),
+             new Points(0.0, 5.0),
+         };
+         CMVHandler handler = new CMVHandler(parameters, datapoints);
+         CMV = handler.generateCMV();
+         assertTrue(CMV[13]);
+     }
+
 }
 
 
