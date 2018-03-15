@@ -33,7 +33,7 @@ public class Decide {
 	}
 	
 	private boolean[][] generatePUM() {
-		boolean toBeReturned [][] = new boolean[15][15];
+		boolean pum [][] = new boolean[15][15];
 		for(int i = 0;i<14;i++){
 			for( int j = 0;i<14;i++){
 				switch (LCM.getElement(i,j)) {
@@ -57,7 +57,7 @@ public class Decide {
 				}
 			}
 		}
-		return toBeReturned;
+		return pum;
 	}
 	
 	private boolean[] generateFUV() {
