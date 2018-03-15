@@ -89,9 +89,31 @@ public class CMVHandler {
 	}
 
 	private boolean licFour() {
-		// TODO Auto-generated method stub
-		return false;
-	}
+        if (parameters.qPts < 2 || parameters.qPts > dataPoints.length){
+            return false;
+        } 
+        if ( parameters.quads > 3 || parameters.quads < 1){
+            return false; 
+        }
+        for (int index = 0; index < (dataPoints.length - parameters.qPts + 1); index++) {
+            boolean[] quads = {false, false, false, false};
+            
+            for (int i = index; i < parameters.qPts + index; i++) {
+                int quadrant = GeometryHelper.getQuadrant(this.dataPoints[i]);
+                quads[quadrant - 1] = true;
+            }
+
+            int numQuads = 0;
+            for (int i = 0; i < quads.length; i++) {
+                if (quads[i])
+                    numQuads++;
+            }
+            if (numQuads > parameters.quads) {
+                return true;
+            }
+        }
+        return false;
+    }
 
 	private boolean licFive() {
         for (int i = 0; i < dataPoints.length - 1; i++) {
