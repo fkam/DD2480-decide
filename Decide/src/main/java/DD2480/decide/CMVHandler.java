@@ -257,10 +257,14 @@ public class CMVHandler {
 	}
 
 	private boolean licFourteen() {
-        boolean greater = false;
+        if (dataPoints.length < 5 || parameters.area2 < 0 ) {
+		return false;
+	}
+		
+	boolean greater = false;
         boolean lesser = false;
 
-        for (int index = 0; index < (parameters.kPts - parameters.ePts - parameters.fPts - 2); index++) {
+        for (int index = 0; index < (dataPoints.length - parameters.ePts - parameters.fPts - 2); index++) {
             if (GeometryHelper.area(dataPoints[index],
                     dataPoints[index + parameters.ePts + 1],
                     dataPoints[index + parameters.ePts + parameters.fPts + 2]) > parameters.area1)
