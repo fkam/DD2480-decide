@@ -45,11 +45,13 @@ public class DecideTest{
 		parameters.gPts = 1;
 		Arrays.fill(puv,false);
 	}
+
 	@Test
-	/**
+	/**g
 	 * @result When all values in the FUV are false yes is allways the output
 	 */
 	public void testFuV(){
-		assertTrue(Decide.Decide(parameters,lcm,puv,points));
+		Decide decide = new Decide(parameters,lcm,puv,points);
+		assertTrue( decide.Decide());
 	}
 }
