@@ -42,15 +42,15 @@ public class Decide {
 		return null;
 	}
 
-    private boolean launch(){
-        for(int i = 0; i < FUV.length; i++){
-            if (!FUV[i]){
-                System.out.println("NO");
-                return false;
+    	public boolean launch(){
+        	for(int i = 0; i < FUV.length; i++){
+            	if (!FUV[i]){
+                	System.out.println("NO");
+                	return false;
             }
         }
-        System.out.println("YES");
-        return true;
+        	System.out.println("YES");
+        	return true;
     }
 
 	
