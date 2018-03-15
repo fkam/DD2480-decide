@@ -1,5 +1,5 @@
 package DD2480.decide;
-import java.lang.Math;
+
 public class GeometryHelper {
 	/**
 	 *@param 3 Points in space where b does not coincide with a or c
@@ -25,9 +25,9 @@ public class GeometryHelper {
 		return Math.abs(area);
 	}
 
-	
-	/**
-	 * @param Three Points and a radious
+
+    /**
+     * @param Three Points and a radious
 	 * @return true if a cirkel with radious r can include all points within or on the egde
 	 */
 	public static boolean pointsWithinACircle(Points a, Points b, Points c, double r) {
@@ -65,5 +65,22 @@ public class GeometryHelper {
 		// if point e is within a distance equal or less then r to any of the two intercekt points then return true
 		return e.distance(intersekt1) <= r || e.distance(intersekt2) <= r;
 	}
-	
+
+    /**
+     * Check which quadrant a point belongs to
+     *
+     * @param point that need to be checked
+     * @return the belonging quadrant
+     */
+    public static int getQuadrant(Points point) {
+        if (point.x >= 0 && point.y >= 0)
+            return 1;
+        if (point.x < 0 && point.y >= 0)
+            return 2;
+        if (point.x <= 0 && point.y < 0)
+            return 3;
+        if (point.x > 0 && point.y < 0)
+            return 4;
+        return -1;
+    }
 }
