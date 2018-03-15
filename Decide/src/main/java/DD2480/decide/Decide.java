@@ -2,22 +2,31 @@ package DD2480.decide;
 
 public class Decide {
 	
+	// Parameters contains all input for Decide()
 	Parameter parameters;
+	// A set of input coordinates
 	Points[] dataPoints;
-	
+	// Preliminary Unlocking Vector
 	boolean[] PUV = new boolean[15];
+	// Conditions Met Vector
 	boolean[] CMV = new boolean[15];
+	// Preliminary Unlocking Matrix
 	boolean[][] PUM = new boolean[15][15];
+	// Final Unlocking Vector
 	boolean[] FUV = new boolean[15];
+	// Logical Connector Matrix
 	Lcm LCM;
 	
+	// This class handles all the LIC conditions
 	CMVHandler CMVHandler;
-
-	public static void main(String[] args) {
-		
-	}
 	
-	public Decide( Parameter parameters, Lcm LCM, boolean[] PUV,  Points[] dataPoints) {
+	/**
+	 *@param Parameters, LCM, PUV and datapoints.
+	 * Decides if it is LAUNCH or NO LAUNCH based upon inputs.
+	 *@return a boolean, true for LAUNCH or false for NO LAUNCH
+	 */
+	public Decide(Parameter parameters, Lcm LCM, boolean[] PUV,  Points[] dataPoints) {
+
 		this.parameters = parameters;
 		this.LCM = LCM;
 		this.PUV = PUV;
@@ -27,12 +36,13 @@ public class Decide {
 		PUM = generatePUM();
 		FUV = generateFUV();
 	}
+  
+	public boolean Decide(){
+		return launch();
+	}
+	
+	// Here are all the LIC conditions processed
 
-
-    public boolean Decide(){
-        return launch();
-    }
-    
 	private boolean[] generateCMV() {
 		return CMVHandler.generateCMV();
 	}
@@ -75,7 +85,7 @@ public class Decide {
         return FUV;
     }
     
-
+	// This is the last decision metod that returns the final boolean
     private boolean launch(){
         for(int i = 0; i < FUV.length; i++){
             if (!FUV[i]){
@@ -87,6 +97,7 @@ public class Decide {
         return true;
     }
 
+    // Used in generatePUV()
     private boolean checkArray(boolean[] array, int i){
         int j = 0;
         for(boolean x : array){
