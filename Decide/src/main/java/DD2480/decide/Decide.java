@@ -17,7 +17,7 @@ public class Decide {
 		
 	}
 	
-	public boolean Decide( Parameter parameters, Lcm LCM, boolean[] PUV,  Points[] dataPoints) {
+	public Decide(Parameter parameters, Lcm LCM, boolean[] PUV,  Points[] dataPoints) {
 		this.parameters = parameters;
 		this.LCM = LCM;
 		this.PUV = PUV;
@@ -26,7 +26,9 @@ public class Decide {
 		CMV = generateCMV();
 		PUM = generatePUM();
 		FUV = generateFUV();
-    return launch();
+	}
+	public boolean Decide(){
+		return launch();
 	}
 
 	private boolean[] generateCMV() {
@@ -34,8 +36,8 @@ public class Decide {
 	}
 	
 	private boolean[][] generatePUM() {
-		for(int i = 0;i<14;i++){
-			for( int j = 0;i<14;i++){
+		for(int i = 0;i<15;i++){
+			for( int j = 0;j<15;j++){
 				switch (LCM.getElement(i,j)) {
 					case ANDD:
 						if(CMV[i] &&CMV[j]){
