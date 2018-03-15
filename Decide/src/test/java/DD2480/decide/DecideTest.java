@@ -21,7 +21,8 @@ public class DecideTest{
 			new Points(0.0,0.0)
 		};
 		Lcm lcm = new Lcm();
-		boolean [] puv = new boolean[15];	
+		boolean [] puv = new boolean[15];
+        boolean[][] fum = new boolean[15][15];
 	@Before
 	public void setup(){
 		parameters.length1 = 1;
@@ -47,11 +48,30 @@ public class DecideTest{
 	}
 
 	@Test
-	/**g
+	/**
 	 * @result When all values in the FUV are false yes is allways the output
 	 */
 	public void testFuV(){
 		Decide decide = new Decide(parameters,lcm,puv,points);
 		assertTrue( decide.Decide());
 	}
+
+    @Test
+    /*
+     * @result return true if whole fum is true
+     * fum set to true if lcm is NOTUSED
+     */
+    public void testFuv2(){   
+        for(int i = 0; i < 15; i++){
+            Arrays.fill(fum[i], true);
+            if(i == 3){
+                for (int j = 0; j < 15; j++){
+                    lcm.setElement(i, j, Lcm.lcmElement.NOTUSED);
+                }
+            }                               
+        }                            
+        Decide decide = new Decide(parameters, lcm, puv, points);
+        assertTrue(decide.Decide());
+    }
+
 }
