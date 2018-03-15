@@ -38,9 +38,27 @@ public class Decide {
 	}
 	
 	private boolean[] generateFUV() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	    for(int i = 0; i < FUV.length; i++){
+            if(!PUV[i] || checkArray(PUM[i], i)){
+                FUV[i] = true;
+            } else {
+                FUV[i] = false;
+            }  
+        }
+        return FUV;
+    }
 
-	
+    private boolean checkArray(boolean[] array, int i){
+        int j = 0;
+        for(boolean x : array){
+            if (j == i){
+                j++;
+                continue;
+            }
+            if (!x){
+                return false;
+            } j++;
+        }
+	    return true;
+    }
 }
