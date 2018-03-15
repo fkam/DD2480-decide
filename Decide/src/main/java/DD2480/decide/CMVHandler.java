@@ -131,7 +131,7 @@ public class CMVHandler {
 	}
 
 	private boolean licSix() {
-		if(parameters.nPts < 3 ||parameters.nPts > dataPoints.length || parameters.dist < 0)
+		if(parameters.nPts < 3 || parameters.nPts > dataPoints.length || parameters.dist < 0)
 			return false;
 		for(int i = 0;i < dataPoints.length-parameters.nPts+1;i++){
 			int k = i + parameters.nPts - 1;
@@ -144,7 +144,7 @@ public class CMVHandler {
 				double d = dataPoints[i].distance(dataPoints[k]);
 				for(int j = i+1;j<k;j++){
 					double s = GeometryHelper.area(dataPoints[i], dataPoints[k], dataPoints[j]);
-					double l = s / d;
+					double l = s / d * 2.0;
 					if(l > parameters.dist)
 						return true;
 				}
@@ -196,7 +196,7 @@ public class CMVHandler {
 	}
 
 	private boolean licTen() {
-		if(parameters.ePts < 1 || parameters.fPts < 1 || parameters.ePts+parameters.fPts+2<dataPoints.length)
+		if(parameters.ePts < 1 || parameters.fPts < 1 || parameters.ePts+parameters.fPts+3 > dataPoints.length)
 			return false;
 		for(int i = 0;i<dataPoints.length-parameters.ePts-parameters.fPts-2;i++){
 			double s = GeometryHelper.area(dataPoints[i], dataPoints[i+parameters.ePts+1],
